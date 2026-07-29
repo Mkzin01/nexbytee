@@ -6,10 +6,15 @@ import {
   Zap, ShieldCheck, Code2, Smartphone, Plus, Minus, Star,
 } from "lucide-react";
 import heroMockup from "@/assets/hero-mockup.jpg";
-import auroraImg from "@/assets/portfolio/aurora.jpg";
-import novaImg from "@/assets/portfolio/nova.jpg";
-import velaImg from "@/assets/portfolio/vela.jpg";
-import norteImg from "@/assets/portfolio/norte.jpg";
+import auroraAsset from "@/assets/portfolio/aurora.png.asset.json";
+import novaAsset from "@/assets/portfolio/nova.png.asset.json";
+import velaAsset from "@/assets/portfolio/vela.png.asset.json";
+import norteAsset from "@/assets/portfolio/norte.png.asset.json";
+
+const auroraImg = auroraAsset.url;
+const novaImg = novaAsset.url;
+const velaImg = velaAsset.url;
+const norteImg = norteAsset.url;
 
 const WHATSAPP_URL = "https://wa.me/351000000000?text=Ol%C3%A1%20NexByte%2C%20quero%20um%20or%C3%A7amento";
 
@@ -610,11 +615,11 @@ function ProjectMockup({ type, image }: { type: Project["mockup"]; image: string
       <img 
         src={image} 
         alt="Preview" 
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover/mockup:scale-105" 
+        className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover/mockup:scale-105" 
       />
       {overlay}
       
-      <div className="absolute inset-0 z-20 flex flex-col">
+      <div className="absolute inset-0 z-20 flex flex-col pointer-events-none">
         {type === "site" && (
           <div className="mt-auto p-4 bg-gradient-to-t from-black/80 to-transparent">
             <div className="h-1.5 w-1/3 rounded bg-white/60" />
