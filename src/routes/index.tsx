@@ -419,6 +419,7 @@ type Project = {
   stack: string[];
   services: string[];
   mockup: "site" | "landing" | "shop" | "seo";
+  image: string;
 };
 
 function Portfolio() {
