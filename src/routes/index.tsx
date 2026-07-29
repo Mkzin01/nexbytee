@@ -403,22 +403,109 @@ function Process() {
 }
 
 /* ---------------- PORTFOLIO ---------------- */
+type Project = {
+  name: string;
+  tag: string;
+  sector: string;
+  location: string;
+  year: string;
+  hue: number;
+  description: string;
+  results: { value: string; label: string }[];
+  stack: string[];
+  services: string[];
+  mockup: "site" | "landing" | "shop" | "seo";
+};
+
 function Portfolio() {
-  const projects = [
-    { name: "Aurora Studio", tag: "Website Institucional", hue: 240 },
-    { name: "Nova Café", tag: "Landing Page", hue: 20 },
-    { name: "Vela Boutique", tag: "Loja Online", hue: 310 },
-    { name: "Norte Advogados", tag: "Website + SEO", hue: 200 },
+  const projects: Project[] = [
+    {
+      name: "Aurora Studio",
+      tag: "Website Institucional",
+      sector: "Arquitetura & Design de Interiores",
+      location: "Porto",
+      year: "2025",
+      hue: 240,
+      description:
+        "Redesign completo do site institucional com foco em portefólio visual imersivo e captação de clientes premium.",
+      results: [
+        { value: "+218%", label: "pedidos de orçamento" },
+        { value: "1.4s", label: "tempo de carregamento" },
+        { value: "98", label: "score Lighthouse" },
+      ],
+      stack: ["Next.js", "Sanity CMS", "Framer Motion"],
+      services: ["UI/UX", "Desenvolvimento", "SEO técnico"],
+      mockup: "site",
+    },
+    {
+      name: "Nova Café",
+      tag: "Landing Page de Conversão",
+      sector: "Restauração & Cafetaria",
+      location: "Lisboa",
+      year: "2025",
+      hue: 20,
+      description:
+        "Landing page para o lançamento da linha de cafés de especialidade, com integração de reservas e newsletter.",
+      results: [
+        { value: "+312%", label: "subscrições no 1º mês" },
+        { value: "6.8%", label: "taxa de conversão" },
+        { value: "42s", label: "tempo médio na página" },
+      ],
+      stack: ["Astro", "Tailwind", "Mailchimp"],
+      services: ["Copywriting", "Landing Page", "Integração CRM"],
+      mockup: "landing",
+    },
+    {
+      name: "Vela Boutique",
+      tag: "Loja Online Premium",
+      sector: "Moda & Retalho",
+      location: "Cascais",
+      year: "2024",
+      hue: 310,
+      description:
+        "E-commerce completo com catálogo, checkout otimizado e integração com o stock da loja física.",
+      results: [
+        { value: "+165%", label: "vendas online" },
+        { value: "-41%", label: "abandono de carrinho" },
+        { value: "4.9★", label: "avaliação de clientes" },
+      ],
+      stack: ["Shopify", "Hydrogen", "Klaviyo"],
+      services: ["E-commerce", "Integração ERP", "Email marketing"],
+      mockup: "shop",
+    },
+    {
+      name: "Norte Advogados",
+      tag: "Website + SEO Local",
+      sector: "Sociedade de Advogados",
+      location: "Braga",
+      year: "2025",
+      hue: 200,
+      description:
+        "Website institucional, blog jurídico e otimização para pesquisas locais em Braga e distrito.",
+      results: [
+        { value: "#1", label: "Google 'advogado Braga'" },
+        { value: "+520%", label: "tráfego orgânico" },
+        { value: "34", label: "leads / mês" },
+      ],
+      stack: ["Astro", "Contentful", "Google Business"],
+      services: ["SEO On-page", "Conteúdo", "Google Business"],
+      mockup: "seo",
+    },
   ];
+
   return (
     <Section id="projetos" eyebrow="Portefólio" title="Projetos recentes.">
-      <div className="grid gap-5 sm:grid-cols-2">
+      <p className="-mt-6 mb-10 max-w-2xl text-muted-foreground">
+        Uma seleção de projetos entregues a clientes em Portugal. Cada um pensado para gerar
+        resultados mensuráveis: mais leads, mais vendas, mais visibilidade.
+      </p>
+      <div className="grid gap-6 lg:grid-cols-2">
         {projects.map((p, i) => (
-          <div
+          <article
             key={p.name}
             data-reveal
             style={{ transitionDelay: `${i * 70}ms` }}
-            className="group opacity-0 translate-y-4 transition-all duration-500 overflow-hidden rounded-2xl border border-border bg-card"
+            className="group flex flex-col opacity-0 translate-y-4 transition-all duration-500 overflow-hidden rounded-2xl border border-border bg-card hover:border-primary/40"
           >
             <div
               className="relative aspect-[16/10] overflow-hidden"
@@ -427,36 +514,133 @@ function Portfolio() {
               }}
             >
               <div className="grid-bg absolute inset-0 opacity-30" />
-              <div className="absolute inset-6 rounded-xl border border-white/10 bg-black/30 backdrop-blur-sm">
+              <div className="absolute inset-4 sm:inset-6 rounded-xl border border-white/10 bg-black/40 backdrop-blur-sm overflow-hidden">
                 <div className="flex items-center gap-1.5 border-b border-white/10 px-3 py-2">
                   <span className="h-2 w-2 rounded-full bg-white/30" />
                   <span className="h-2 w-2 rounded-full bg-white/30" />
                   <span className="h-2 w-2 rounded-full bg-white/30" />
+                  <span className="ml-2 truncate text-[10px] text-white/40">
+                    {p.name.toLowerCase().replace(/\s+/g, "")}.pt
+                  </span>
                 </div>
-                <div className="p-4 space-y-2">
-                  <div className="h-2 w-1/2 rounded bg-white/30" />
-                  <div className="h-2 w-2/3 rounded bg-white/20" />
-                  <div className="mt-4 grid grid-cols-3 gap-2">
-                    <div className="h-10 rounded bg-white/10" />
-                    <div className="h-10 rounded bg-white/10" />
-                    <div className="h-10 rounded bg-white/10" />
-                  </div>
-                </div>
+                <ProjectMockup type={p.mockup} />
+              </div>
+              <div className="absolute left-4 top-4 flex gap-2 sm:left-6 sm:top-6">
+                <span className="rounded-full bg-black/60 px-2.5 py-1 text-[10px] font-medium text-white/90 backdrop-blur">
+                  {p.year}
+                </span>
+                <span className="rounded-full bg-primary/90 px-2.5 py-1 text-[10px] font-medium text-primary-foreground">
+                  {p.tag}
+                </span>
               </div>
             </div>
-            <div className="flex items-center justify-between p-5">
+
+            <div className="flex flex-1 flex-col gap-4 p-6">
               <div>
-                <div className="text-xs text-muted-foreground">{p.tag}</div>
-                <div className="font-semibold">{p.name}</div>
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <MapPin className="h-3 w-3" />
+                  {p.location} · {p.sector}
+                </div>
+                <h3 className="mt-1 text-xl font-semibold">{p.name}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{p.description}</p>
               </div>
-              <span className="grid h-9 w-9 place-items-center rounded-full border border-border text-muted-foreground transition-all group-hover:border-primary group-hover:text-primary">
-                <ArrowRight className="h-4 w-4" />
-              </span>
+
+              <div className="grid grid-cols-3 gap-2 rounded-xl border border-border bg-background/40 p-3">
+                {p.results.map((r) => (
+                  <div key={r.label} className="text-center">
+                    <div className="text-base font-bold text-primary sm:text-lg">{r.value}</div>
+                    <div className="text-[10px] leading-tight text-muted-foreground">{r.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-1.5">
+                {p.services.map((s) => (
+                  <span
+                    key={s}
+                    className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground"
+                  >
+                    {s}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-auto flex items-center justify-between border-t border-border pt-4">
+                <div className="text-[11px] text-muted-foreground">
+                  Stack: <span className="text-foreground/80">{p.stack.join(" · ")}</span>
+                </div>
+                <span className="grid h-9 w-9 place-items-center rounded-full border border-border text-muted-foreground transition-all group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+              </div>
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </Section>
+  );
+}
+
+function ProjectMockup({ type }: { type: Project["mockup"] }) {
+  if (type === "site") {
+    return (
+      <div className="space-y-2 p-4">
+        <div className="h-2 w-1/3 rounded bg-white/40" />
+        <div className="h-2 w-1/2 rounded bg-white/20" />
+        <div className="mt-3 grid grid-cols-3 gap-2">
+          <div className="aspect-square rounded bg-white/15" />
+          <div className="aspect-square rounded bg-white/10" />
+          <div className="aspect-square rounded bg-white/15" />
+        </div>
+      </div>
+    );
+  }
+  if (type === "landing") {
+    return (
+      <div className="space-y-2 p-4">
+        <div className="h-3 w-2/3 rounded bg-white/40" />
+        <div className="h-2 w-1/2 rounded bg-white/20" />
+        <div className="mt-2 h-7 w-24 rounded-md bg-white/70" />
+        <div className="mt-3 flex gap-2">
+          <div className="h-8 flex-1 rounded bg-white/10" />
+          <div className="h-8 flex-1 rounded bg-white/10" />
+        </div>
+      </div>
+    );
+  }
+  if (type === "shop") {
+    return (
+      <div className="p-4">
+        <div className="mb-2 flex items-center justify-between">
+          <div className="h-2 w-16 rounded bg-white/30" />
+          <ShoppingBag className="h-3 w-3 text-white/60" />
+        </div>
+        <div className="grid grid-cols-3 gap-1.5">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="space-y-1">
+              <div className="aspect-square rounded bg-white/15" />
+              <div className="h-1 w-2/3 rounded bg-white/20" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="space-y-2 p-4">
+      <div className="flex items-center gap-1.5">
+        <Search className="h-3 w-3 text-white/50" />
+        <div className="h-2 flex-1 rounded bg-white/20" />
+      </div>
+      <div className="mt-2 space-y-1.5">
+        {[70, 55, 60].map((w, i) => (
+          <div key={i} className="rounded bg-white/10 p-1.5">
+            <div className="h-1.5 rounded bg-white/40" style={{ width: `${w}%` }} />
+            <div className="mt-1 h-1 w-1/3 rounded bg-white/20" />
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
