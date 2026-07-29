@@ -431,6 +431,7 @@ function Portfolio() {
       location: "Porto",
       year: "2025",
       hue: 240,
+      image: auroraImg,
       description:
         "Redesign completo do site institucional com foco em portefólio visual imersivo e captação de clientes premium.",
       results: [
@@ -449,6 +450,7 @@ function Portfolio() {
       location: "Lisboa",
       year: "2025",
       hue: 20,
+      image: novaImg,
       description:
         "Landing page para o lançamento da linha de cafés de especialidade, com integração de reservas e newsletter.",
       results: [
@@ -467,6 +469,7 @@ function Portfolio() {
       location: "Cascais",
       year: "2024",
       hue: 310,
+      image: velaImg,
       description:
         "E-commerce completo com catálogo, checkout otimizado e integração com o stock da loja física.",
       results: [
@@ -485,6 +488,7 @@ function Portfolio() {
       location: "Braga",
       year: "2025",
       hue: 200,
+      image: norteImg,
       description:
         "Website institucional, blog jurídico e otimização para pesquisas locais em Braga e distrito.",
       results: [
