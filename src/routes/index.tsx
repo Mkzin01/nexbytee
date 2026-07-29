@@ -76,10 +76,95 @@ function CountUp({ to, suffix = "", duration = 1600 }: { to: number; suffix?: st
 function Index() {
   useReveal();
   const [navOpen, setNavOpen] = useState(false);
+  const [showNotice, setShowNotice] = useState(false);
+
+  useEffect(() => {
+    const hasSeenNotice = sessionStorage.getItem("nexbyte_notice_seen");
+    if (!hasSeenNotice) {
+      setShowNotice(true);
+    }
+  }, []);
+
+  const closeNotice = () => {
+    setShowNotice(false);
+    sessionStorage.setItem("nexbyte_notice_seen", "true");
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeNotice();
+    };
+    if (showNotice) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [showNotice]);
+
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav open={navOpen} setOpen={setNavOpen} />
+      {showNotice && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-sm bg-black/40 animate-in fade-in duration-300"
+          onClick={closeNotice}
+        >
+          <div 
+            className="relative w-full max-w-[420px] rounded-3xl bg-card border border-border p-8 text-center shadow-2xl animate-in zoom-in-95 duration-300"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              onClick={closeNotice}
+              className="absolute right-4 top-4 p-2 text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Fechar"
+            >
+              <X className="h-5 w-5" />
+            </button>
+            
+            <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-500">
+              <Zap className="h-7 w-7" />
+            </div>
+
+            <h2 className="text-2xl font-bold tracking-tight mb-4 flex items-center justify-center gap-2">
+              <span>ℹ️</span> Versão não oficial
+            </h2>
+            
+            <div className="space-y-4 text-muted-foreground text-[15px] leading-relaxed mb-8">
+              <p>
+                Você está utilizando uma versão não oficial da extensão. Versões modificadas podem não receber atualizações e comprometer a segurança dos seus dados.
+              </p>
+              <p>
+                Para sua segurança, recomendamos usar apenas a versão oficial.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <a
+                href="https://chat.whatsapp.com/IWXJNQnsLj089fbjzf7796"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-xl bg-emerald-500 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:brightness-110 active:scale-[0.98]"
+              >
+                Entrar no Grupo Oficial
+              </a>
+              <a
+                href="https://leigosacademy.site"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-xl border border-border bg-secondary/50 px-6 py-3.5 text-sm font-semibold text-foreground transition-all hover:bg-secondary active:scale-[0.98]"
+              >
+                Site Oficial
+              </a>
+              <button
+                onClick={closeNotice}
+                className="mt-2 text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4"
+              >
+                Fechar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <Hero />
       <Stats />
       <Services />
