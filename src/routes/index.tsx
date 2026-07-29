@@ -471,7 +471,7 @@ function Portfolio() {
       hue: 310,
       image: velaImg,
       description:
-        "E-commerce completo com catálogo, checkout otimizado e integração com o stock da loja física.",
+        "Loja online sofisticada com navegação intuitiva, focada na experiência de luxo e conversão de vendas mobile.",
       results: [
         { value: "+165%", label: "vendas online" },
         { value: "-41%", label: "abandono de carrinho" },
