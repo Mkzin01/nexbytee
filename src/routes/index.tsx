@@ -532,7 +532,7 @@ function Portfolio() {
                     {p.name.toLowerCase().replace(/\s+/g, "")}.pt
                   </span>
                 </div>
-                <ProjectMockup type={p.mockup} />
+                <ProjectMockup type={p.mockup} image={p.image} />
               </div>
               <div className="absolute left-4 top-4 flex gap-2 sm:left-6 sm:top-6">
                 <span className="rounded-full bg-black/60 px-2.5 py-1 text-[10px] font-medium text-white/90 backdrop-blur">
