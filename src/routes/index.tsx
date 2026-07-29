@@ -599,14 +599,6 @@ function ProjectMockup({ type, image }: { type: Project["mockup"]; image: string
     </div>
   );
 }
-              <div className="h-1 w-1/2 rounded bg-white/20" />
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
 
 /* ---------------- WHY US ---------------- */
 function WhyUs() {
