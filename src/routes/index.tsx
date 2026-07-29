@@ -452,7 +452,7 @@ function Portfolio() {
       hue: 20,
       image: novaImg,
       description:
-        "Landing page para o lançamento da linha de cafés de especialidade, com integração de reservas e newsletter.",
+        "Landing page vibrante para uma marca de café artesanal, otimizada para subscrições e pedidos rápidos.",
       results: [
         { value: "+312%", label: "subscrições no 1º mês" },
         { value: "6.8%", label: "taxa de conversão" },
