@@ -523,16 +523,18 @@ function Portfolio() {
               }}
             >
               <div className="grid-bg absolute inset-0 opacity-30" />
-              <div className="absolute inset-4 sm:inset-6 rounded-xl border border-white/10 bg-black/40 backdrop-blur-sm overflow-hidden">
-                <div className="flex items-center gap-1.5 border-b border-white/10 px-3 py-2">
-                  <span className="h-2 w-2 rounded-full bg-white/30" />
-                  <span className="h-2 w-2 rounded-full bg-white/30" />
-                  <span className="h-2 w-2 rounded-full bg-white/30" />
-                  <span className="ml-2 truncate text-[10px] text-white/40">
+              <div className="absolute inset-4 sm:inset-6 rounded-xl border border-white/10 bg-black/40 backdrop-blur-sm overflow-hidden flex flex-col">
+                <div className="flex items-center gap-1.5 border-b border-white/10 px-3 py-2 bg-black/20">
+                  <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
+                  <span className="ml-2 truncate text-[9px] font-mono text-white/30 uppercase tracking-widest">
                     {p.name.toLowerCase().replace(/\s+/g, "")}.pt
                   </span>
                 </div>
-                <ProjectMockup type={p.mockup} image={p.image} />
+                <div className="relative flex-1 overflow-hidden">
+                  <ProjectMockup type={p.mockup} image={p.image} />
+                </div>
               </div>
               <div className="absolute left-4 top-4 flex gap-2 sm:left-6 sm:top-6">
                 <span className="rounded-full bg-black/60 px-2.5 py-1 text-[10px] font-medium text-white/90 backdrop-blur">
