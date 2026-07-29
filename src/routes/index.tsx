@@ -505,8 +505,8 @@ function Portfolio() {
   return (
     <Section id="projetos" eyebrow="Portefólio" title="Projetos recentes.">
       <p className="-mt-6 mb-10 max-w-2xl text-muted-foreground">
-        Uma seleção de projetos entregues a clientes em Portugal. Cada um pensado para gerar
-        resultados mensuráveis: mais leads, mais vendas, mais visibilidade.
+        Projetos reais, resultados extraordinários. Conheça algumas das soluções digitais que
+        desenvolvemos para transformar o negócio dos nossos clientes.
       </p>
       <div className="grid gap-6 lg:grid-cols-2">
         {projects.map((p, i) => (
