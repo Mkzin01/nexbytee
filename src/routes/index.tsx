@@ -529,7 +529,7 @@ function Portfolio() {
             >
               <div className="grid-bg absolute inset-0 opacity-30" />
               <div className="absolute inset-0 overflow-hidden flex flex-col">
-                <ProjectMockup type={p.mockup} image={p.image} />
+                <ProjectMockup type={p.mockup} image={p.image} name={p.name} />
               </div>
               <div className="absolute left-4 top-4 flex gap-2 sm:left-6 sm:top-6 z-30">
                 <span className="rounded-full bg-black/60 px-2.5 py-1 text-[10px] font-medium text-white/90 backdrop-blur">
