@@ -540,14 +540,6 @@ function Portfolio() {
                 </span>
               </div>
             </div>
-                <span className="rounded-full bg-black/60 px-2.5 py-1 text-[10px] font-medium text-white/90 backdrop-blur">
-                  {p.year}
-                </span>
-                <span className="rounded-full bg-primary/90 px-2.5 py-1 text-[10px] font-medium text-primary-foreground">
-                  {p.tag}
-                </span>
-              </div>
-            </div>
 
             <div className="flex flex-1 flex-col gap-4 p-6">
               <div>
