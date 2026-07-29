@@ -490,7 +490,7 @@ function Portfolio() {
       hue: 200,
       image: norteImg,
       description:
-        "Website institucional, blog jurídico e otimização para pesquisas locais em Braga e distrito.",
+        "Portal jurídico de alta autoridade, focado em clareza informativa e geração de leads qualificados via SEO local.",
       results: [
         { value: "#1", label: "Google 'advogado Braga'" },
         { value: "+520%", label: "tráfego orgânico" },
