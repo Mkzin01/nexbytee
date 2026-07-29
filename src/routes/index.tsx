@@ -433,7 +433,7 @@ function Portfolio() {
       hue: 240,
       image: auroraImg,
       description:
-        "Redesign completo do site institucional com foco em portefólio visual imersivo e captação de clientes premium.",
+        "Presença digital minimalista para um estúdio de arquitetura premiado, focada em visual impactante e UX fluida.",
       results: [
         { value: "+218%", label: "pedidos de orçamento" },
         { value: "1.4s", label: "tempo de carregamento" },
