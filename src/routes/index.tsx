@@ -1,24 +1,725 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef, useState } from "react";
+import {
+  ArrowRight, Check, Globe, Rocket, MapPin, ShoppingBag, Sparkles, Search,
+  Palette, TrendingUp, Menu, X, Phone, Mail, Instagram, Facebook, Linkedin,
+  Zap, ShieldCheck, Code2, Smartphone, Plus, Minus, Star,
+} from "lucide-react";
+import heroMockup from "@/assets/hero-mockup.jpg";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const WHATSAPP_URL = "https://wa.me/351000000000?text=Ol%C3%A1%20NexByte%2C%20quero%20um%20or%C3%A7amento";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "NexByte — Criação de Websites Profissionais em Portugal" },
+      { name: "description", content: "Desenvolvimento de websites, landing pages, identidade visual, SEO e Google Business para empresas em todo Portugal. Design premium e alta conversão." },
+      { property: "og:title", content: "NexByte — Criação de Websites em Portugal" },
+      { property: "og:description", content: "Websites que fazem empresas crescer. Design premium, mobile first e otimizado para conversão." },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+function useReveal() {
+  useEffect(() => {
+    const els = document.querySelectorAll<HTMLElement>("[data-reveal]");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("opacity-100", "translate-y-0");
+            e.target.classList.remove("opacity-0", "translate-y-4");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12 },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+}
+
+function CountUp({ to, suffix = "", duration = 1600 }: { to: number; suffix?: string; duration?: number }) {
+  const [n, setN] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    const io = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        const start = performance.now();
+        const step = (t: number) => {
+          const p = Math.min(1, (t - start) / duration);
+          setN(Math.floor(p * to));
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+        io.disconnect();
+      }
+    });
+    io.observe(ref.current);
+    return () => io.disconnect();
+  }, [to, duration]);
+  return <span ref={ref}>{n.toLocaleString("pt-PT")}{suffix}</span>;
+}
+
 function Index() {
+  useReveal();
+  const [navOpen, setNavOpen] = useState(false);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background text-foreground">
+      <Nav open={navOpen} setOpen={setNavOpen} />
+      <Hero />
+      <Stats />
+      <Services />
+      <Plans />
+      <Process />
+      <Portfolio />
+      <WhyUs />
+      <GoogleBusiness />
+      <LandingSection />
+      <FAQ />
+      <FinalCTA />
+      <Footer />
     </div>
+  );
+}
+
+/* ---------------- NAV ---------------- */
+function Nav({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => void }) {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const on = () => setScrolled(window.scrollY > 8);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
+  const links = [
+    ["Serviços", "#servicos"],
+    ["Planos", "#planos"],
+    ["Processo", "#processo"],
+    ["Projetos", "#projetos"],
+    ["FAQ", "#faq"],
+  ];
+  return (
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all ${
+        scrolled ? "backdrop-blur-xl bg-background/70 border-b border-border" : "bg-transparent"
+      }`}
+    >
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
+        <a href="#" className="flex items-center gap-2 font-bold tracking-tight">
+          <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary text-primary-foreground">
+            <Zap className="h-4 w-4" />
+          </span>
+          <span className="text-lg">NexByte</span>
+        </a>
+        <nav className="hidden items-center gap-8 md:flex">
+          {links.map(([l, h]) => (
+            <a key={h} href={h} className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+              {l}
+            </a>
+          ))}
+        </nav>
+        <div className="hidden md:block">
+          <a
+            href={WHATSAPP_URL}
+            className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all hover:brightness-110 hover:shadow-[0_0_30px_-5px_var(--electric-glow)]"
+          >
+            Pedir Orçamento <ArrowRight className="h-3.5 w-3.5" />
+          </a>
+        </div>
+        <button
+          className="md:hidden rounded-md p-2 text-foreground"
+          onClick={() => setOpen(!open)}
+          aria-label="Menu"
+        >
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
+      </div>
+      {open && (
+        <div className="border-t border-border bg-background/95 backdrop-blur-xl md:hidden">
+          <div className="mx-auto max-w-7xl px-5 py-4">
+            <div className="flex flex-col gap-1">
+              {links.map(([l, h]) => (
+                <a
+                  key={h}
+                  href={h}
+                  onClick={() => setOpen(false)}
+                  className="rounded-md px-3 py-2.5 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground"
+                >
+                  {l}
+                </a>
+              ))}
+              <a
+                href={WHATSAPP_URL}
+                className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground"
+              >
+                Pedir Orçamento <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
+
+/* ---------------- HERO ---------------- */
+function Hero() {
+  return (
+    <section className="relative overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-24">
+      <div className="grid-bg pointer-events-none absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
+      <div
+        className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[900px] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
+        style={{ background: "radial-gradient(closest-side, var(--electric-glow), transparent)" }}
+      />
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
+          <div data-reveal className="opacity-0 translate-y-4 transition-all duration-700">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs text-muted-foreground">
+              <span className="grid h-1.5 w-1.5 place-items-center rounded-full bg-primary shadow-[0_0_10px_var(--electric)]" />
+              Atendemos empresas em todo Portugal
+            </div>
+            <h1 className="mt-5 text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl">
+              Criamos websites que{" "}
+              <span className="relative whitespace-nowrap">
+                <span className="bg-gradient-to-r from-primary to-[oklch(0.75_0.18_240)] bg-clip-text text-transparent">
+                  fazem empresas
+                </span>
+              </span>{" "}
+              crescer.
+            </h1>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+              Desenvolvemos websites, landing pages, identidade visual e presença digital para empresas em todo Portugal.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href={WHATSAPP_URL}
+                className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110 hover:shadow-[0_0_40px_-5px_var(--electric-glow)]"
+              >
+                Pedir Orçamento
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </a>
+              <a
+                href="#projetos"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+              >
+                Ver Projetos
+              </a>
+            </div>
+            <div className="mt-8 flex items-center gap-6 text-xs text-muted-foreground">
+              <div className="flex items-center gap-1.5">
+                <div className="flex -space-x-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-3.5 w-3.5 fill-primary text-primary" />
+                  ))}
+                </div>
+                <span>+1000 clientes atendidos</span>
+              </div>
+              <div className="hidden sm:flex items-center gap-1.5">
+                <ShieldCheck className="h-3.5 w-3.5 text-primary" /> Entrega garantida
+              </div>
+            </div>
+          </div>
+
+          <div data-reveal className="opacity-0 translate-y-4 transition-all duration-700 delay-150">
+            <div className="relative">
+              <div className="absolute -inset-6 rounded-3xl bg-primary/10 blur-3xl" />
+              <div className="relative overflow-hidden rounded-2xl border border-border bg-card glow-electric">
+                <img
+                  src={heroMockup}
+                  alt="Mockups de websites desenvolvidos pela NexByte"
+                  className="w-full object-cover"
+                  loading="eager"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- STATS ---------------- */
+function Stats() {
+  const items = [
+    { v: 5, s: "+", l: "anos de experiência" },
+    { v: 1000, s: "+", l: "clientes atendidos em Portugal" },
+    { v: 100, s: "+", l: "clientes recorrentes" },
+    { v: 40, s: "+", l: "projetos para grandes empresas" },
+  ];
+  return (
+    <section className="border-y border-border bg-secondary/30">
+      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-y-8 gap-x-4 px-5 py-12 sm:px-8 md:grid-cols-4">
+        {items.map((it, i) => (
+          <div key={i} data-reveal className="opacity-0 translate-y-4 transition-all duration-500" style={{ transitionDelay: `${i * 80}ms` }}>
+            <div className="text-3xl font-black tracking-tight text-foreground sm:text-4xl">
+              <CountUp to={it.v} suffix={it.s} />
+            </div>
+            <div className="mt-1 text-xs text-muted-foreground sm:text-sm">{it.l}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- SERVICES ---------------- */
+function Services() {
+  const services = [
+    { icon: Globe, title: "Website Institucional", desc: "Presença digital sólida, moderna e alinhada com a sua marca." },
+    { icon: Rocket, title: "Landing Pages", desc: "Páginas focadas em conversão para as suas campanhas." },
+    { icon: MapPin, title: "Google Business", desc: "Perfis otimizados para atrair mais chamadas e clientes locais." },
+    { icon: ShoppingBag, title: "Lojas Online", desc: "E-commerce rápido, seguro e pronto para vender." },
+    { icon: Sparkles, title: "Logótipos", desc: "Identidade única, memorável e profissional." },
+    { icon: Search, title: "SEO", desc: "Aparecer no Google para as pesquisas certas." },
+    { icon: Palette, title: "Identidade Visual", desc: "Branding coerente em todos os pontos de contacto." },
+    { icon: TrendingUp, title: "Otimização de Conversão", desc: "Mais leads e vendas a partir do mesmo tráfego." },
+  ];
+  return (
+    <Section id="servicos" eyebrow="Serviços" title="Tudo o que a sua empresa precisa online.">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {services.map((s, i) => (
+          <div
+            key={s.title}
+            data-reveal
+            className="group relative opacity-0 translate-y-4 rounded-xl border border-border bg-card p-5 transition-all duration-500 hover:border-primary/40 hover:-translate-y-0.5"
+            style={{ transitionDelay: `${(i % 4) * 60}ms` }}
+          >
+            <div className="grid h-10 w-10 place-items-center rounded-lg bg-secondary text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+              <s.icon className="h-5 w-5" />
+            </div>
+            <h3 className="mt-4 text-base font-semibold">{s.title}</h3>
+            <p className="mt-1.5 text-sm text-muted-foreground">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+/* ---------------- PLANS ---------------- */
+function Plans() {
+  const plans = [
+    {
+      name: "Landing Page",
+      desc: "Ideal para pequenas empresas.",
+      features: ["1 página otimizada", "Design personalizado", "Formulário de contacto", "SEO básico", "100% Mobile"],
+    },
+    {
+      name: "Website Profissional",
+      desc: "Ideal para empresas em crescimento.",
+      features: ["Até 6 páginas", "Design premium exclusivo", "Blog opcional", "SEO on-page", "Integração WhatsApp", "Google Analytics"],
+      featured: true,
+    },
+    {
+      name: "Solução Completa",
+      desc: "Website + Google Business + Branding + SEO.",
+      features: ["Website Profissional", "Identidade visual completa", "Google Business otimizado", "SEO avançado", "Suporte prioritário"],
+    },
+  ];
+  return (
+    <Section id="planos" eyebrow="Planos" title="Uma solução para cada fase do seu negócio.">
+      <div className="grid gap-5 md:grid-cols-3">
+        {plans.map((p, i) => (
+          <div
+            key={p.name}
+            data-reveal
+            style={{ transitionDelay: `${i * 80}ms` }}
+            className={`relative opacity-0 translate-y-4 rounded-2xl border p-6 transition-all duration-500 ${
+              p.featured
+                ? "border-primary/50 bg-gradient-to-b from-primary/10 to-card glow-electric md:-mt-4 md:mb-4"
+                : "border-border bg-card hover:border-border/80"
+            }`}
+          >
+            {p.featured && (
+              <div className="absolute -top-3 left-6 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">
+                Mais escolhido
+              </div>
+            )}
+            <h3 className="text-xl font-bold">{p.name}</h3>
+            <p className="mt-1 text-sm text-muted-foreground">{p.desc}</p>
+            <ul className="mt-6 space-y-2.5">
+              {p.features.map((f) => (
+                <li key={f} className="flex items-start gap-2 text-sm">
+                  <Check className={`mt-0.5 h-4 w-4 shrink-0 ${p.featured ? "text-primary" : "text-muted-foreground"}`} />
+                  <span className="text-foreground/90">{f}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              href={WHATSAPP_URL}
+              className={`mt-8 inline-flex w-full items-center justify-center gap-1.5 rounded-full px-4 py-2.5 text-sm font-semibold transition-all ${
+                p.featured
+                  ? "bg-primary text-primary-foreground hover:brightness-110"
+                  : "border border-border bg-secondary text-foreground hover:bg-accent"
+              }`}
+            >
+              Pedir Orçamento <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+/* ---------------- PROCESS ---------------- */
+function Process() {
+  const steps = [
+    ["Briefing", "Compreender o seu negócio e objetivos."],
+    ["Design", "Prototipagem visual moderna e alinhada com a marca."],
+    ["Desenvolvimento", "Código limpo, rápido e responsivo."],
+    ["Revisões", "Ajustes finos até ficar perfeito."],
+    ["Publicação", "Lançamento e configuração no seu domínio."],
+    ["Suporte", "Acompanhamento contínuo pós-lançamento."],
+  ];
+  return (
+    <Section id="processo" eyebrow="Processo" title="Simples, transparente, previsível.">
+      <ol className="relative grid gap-6 md:grid-cols-3">
+        {steps.map(([t, d], i) => (
+          <li
+            key={t}
+            data-reveal
+            style={{ transitionDelay: `${i * 60}ms` }}
+            className="opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-5"
+          >
+            <div className="flex items-center gap-3">
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-primary/15 text-xs font-bold text-primary">
+                0{i + 1}
+              </span>
+              <h3 className="font-semibold">{t}</h3>
+            </div>
+            <p className="mt-3 text-sm text-muted-foreground">{d}</p>
+          </li>
+        ))}
+      </ol>
+    </Section>
+  );
+}
+
+/* ---------------- PORTFOLIO ---------------- */
+function Portfolio() {
+  const projects = [
+    { name: "Aurora Studio", tag: "Website Institucional", hue: 240 },
+    { name: "Nova Café", tag: "Landing Page", hue: 20 },
+    { name: "Vela Boutique", tag: "Loja Online", hue: 310 },
+    { name: "Norte Advogados", tag: "Website + SEO", hue: 200 },
+  ];
+  return (
+    <Section id="projetos" eyebrow="Portefólio" title="Projetos recentes.">
+      <div className="grid gap-5 sm:grid-cols-2">
+        {projects.map((p, i) => (
+          <div
+            key={p.name}
+            data-reveal
+            style={{ transitionDelay: `${i * 70}ms` }}
+            className="group opacity-0 translate-y-4 transition-all duration-500 overflow-hidden rounded-2xl border border-border bg-card"
+          >
+            <div
+              className="relative aspect-[16/10] overflow-hidden"
+              style={{
+                background: `radial-gradient(circle at 30% 20%, oklch(0.55 0.2 ${p.hue}) 0%, oklch(0.18 0.02 260) 70%)`,
+              }}
+            >
+              <div className="grid-bg absolute inset-0 opacity-30" />
+              <div className="absolute inset-6 rounded-xl border border-white/10 bg-black/30 backdrop-blur-sm">
+                <div className="flex items-center gap-1.5 border-b border-white/10 px-3 py-2">
+                  <span className="h-2 w-2 rounded-full bg-white/30" />
+                  <span className="h-2 w-2 rounded-full bg-white/30" />
+                  <span className="h-2 w-2 rounded-full bg-white/30" />
+                </div>
+                <div className="p-4 space-y-2">
+                  <div className="h-2 w-1/2 rounded bg-white/30" />
+                  <div className="h-2 w-2/3 rounded bg-white/20" />
+                  <div className="mt-4 grid grid-cols-3 gap-2">
+                    <div className="h-10 rounded bg-white/10" />
+                    <div className="h-10 rounded bg-white/10" />
+                    <div className="h-10 rounded bg-white/10" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center justify-between p-5">
+              <div>
+                <div className="text-xs text-muted-foreground">{p.tag}</div>
+                <div className="font-semibold">{p.name}</div>
+              </div>
+              <span className="grid h-9 w-9 place-items-center rounded-full border border-border text-muted-foreground transition-all group-hover:border-primary group-hover:text-primary">
+                <ArrowRight className="h-4 w-4" />
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+/* ---------------- WHY US ---------------- */
+function WhyUs() {
+  const items = [
+    { icon: Palette, t: "Design exclusivo", d: "Sem templates genéricos." },
+    { icon: Smartphone, t: "Mobile First", d: "Perfeito em qualquer dispositivo." },
+    { icon: Search, t: "SEO", d: "Preparado para aparecer no Google." },
+    { icon: MapPin, t: "Google Business", d: "Presença local otimizada." },
+    { icon: Zap, t: "Carregamento rápido", d: "Performance acima de 95." },
+    { icon: ShieldCheck, t: "Suporte real", d: "Estamos aqui depois do lançamento." },
+    { icon: Rocket, t: "Entrega rápida", d: "Do briefing ao live em dias." },
+    { icon: Code2, t: "Código moderno", d: "Manutenção fácil e escalável." },
+  ];
+  return (
+    <Section eyebrow="Porquê NexByte" title="Motivos para trabalhar connosco.">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {items.map((it, i) => (
+          <div
+            key={it.t}
+            data-reveal
+            style={{ transitionDelay: `${(i % 4) * 60}ms` }}
+            className="opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-5"
+          >
+            <it.icon className="h-5 w-5 text-primary" />
+            <div className="mt-3 font-semibold">{it.t}</div>
+            <div className="mt-1 text-sm text-muted-foreground">{it.d}</div>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+/* ---------------- GOOGLE BUSINESS ---------------- */
+function GoogleBusiness() {
+  const perks = ["Mais visibilidade local", "Mais chamadas", "Mais rotas até si", "Mais clientes"];
+  return (
+    <Section eyebrow="Google Business" title="Apareça no topo do mapa. Literalmente.">
+      <div className="grid gap-8 rounded-2xl border border-border bg-card p-6 md:grid-cols-2 md:p-10">
+        <div>
+          <p className="text-muted-foreground">
+            Desenvolvemos e otimizamos o seu perfil do Google Business para que a sua empresa apareça primeiro
+            quando um cliente pesquisa pelos seus serviços na sua zona.
+          </p>
+          <ul className="mt-6 space-y-3">
+            {perks.map((p) => (
+              <li key={p} className="flex items-center gap-2 text-sm">
+                <span className="grid h-5 w-5 place-items-center rounded-full bg-primary/15 text-primary">
+                  <Check className="h-3 w-3" />
+                </span>
+                {p}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="relative overflow-hidden rounded-xl border border-border bg-background p-4">
+          <div className="flex items-center gap-3 border-b border-border pb-3">
+            <div className="grid h-10 w-10 place-items-center rounded-lg bg-primary/20 text-primary">
+              <MapPin className="h-5 w-5" />
+            </div>
+            <div>
+              <div className="text-sm font-semibold">A sua Empresa • Portugal</div>
+              <div className="text-xs text-muted-foreground">4,9 ★ ★ ★ ★ ★ · 128 avaliações</div>
+            </div>
+          </div>
+          <div className="mt-3 grid grid-cols-3 gap-2 text-center text-xs">
+            {["Ligar", "Rota", "Website"].map((a) => (
+              <div key={a} className="rounded-lg bg-secondary py-2 text-foreground">{a}</div>
+            ))}
+          </div>
+          <div className="mt-3 h-32 rounded-lg grid-bg border border-border" />
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+/* ---------------- LANDING SECTION ---------------- */
+function LandingSection() {
+  return (
+    <Section eyebrow="Landing Pages" title="Feitas para converter, não só para apresentar.">
+      <div className="grid gap-5 md:grid-cols-3">
+        {[
+          { t: "Ideais para anúncios", d: "Google Ads e Meta Ads chegam a uma página focada num único objetivo." },
+          { t: "Alta taxa de conversão", d: "Estrutura, copy e provas sociais desenhadas para gerar leads." },
+          { t: "Testes A/B", d: "Iteramos rapidamente para melhorar resultados ao longo do tempo." },
+        ].map((c, i) => (
+          <div
+            key={c.t}
+            data-reveal
+            style={{ transitionDelay: `${i * 60}ms` }}
+            className="opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-6"
+          >
+            <TrendingUp className="h-5 w-5 text-primary" />
+            <h3 className="mt-3 font-semibold">{c.t}</h3>
+            <p className="mt-1 text-sm text-muted-foreground">{c.d}</p>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+/* ---------------- FAQ ---------------- */
+function FAQ() {
+  const faqs = [
+    ["Quanto tempo demora um website?", "Entre 7 e 21 dias úteis dependendo da complexidade e do plano escolhido."],
+    ["O domínio está incluído?", "Sim, incluímos o registo do domínio no primeiro ano em todos os planos."],
+    ["O alojamento está incluído?", "Sim, alojamento rápido e seguro incluído durante o primeiro ano."],
+    ["Posso alterar o site depois?", "Claro. Entregamos formação e oferecemos planos de manutenção mensais."],
+    ["O site aparece no Google?", "Todos os sites são otimizados para SEO desde o primeiro dia."],
+    ["Fazem manutenção?", "Sim, temos planos de suporte técnico e atualizações contínuas."],
+  ];
+  const [open, setOpen] = useState<number | null>(0);
+  return (
+    <Section id="faq" eyebrow="FAQ" title="Perguntas frequentes.">
+      <div className="mx-auto max-w-3xl divide-y divide-border rounded-2xl border border-border bg-card">
+        {faqs.map(([q, a], i) => {
+          const isOpen = open === i;
+          return (
+            <button
+              key={q}
+              onClick={() => setOpen(isOpen ? null : i)}
+              className="w-full px-5 py-4 text-left"
+            >
+              <div className="flex items-center justify-between gap-4">
+                <span className="text-sm font-medium sm:text-base">{q}</span>
+                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-border text-muted-foreground">
+                  {isOpen ? <Minus className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
+                </span>
+              </div>
+              <div
+                className={`grid overflow-hidden text-sm text-muted-foreground transition-all duration-300 ${
+                  isOpen ? "mt-3 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                }`}
+              >
+                <div className="min-h-0">{a}</div>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+    </Section>
+  );
+}
+
+/* ---------------- FINAL CTA ---------------- */
+function FinalCTA() {
+  return (
+    <section className="relative overflow-hidden py-20 sm:py-28">
+      <div
+        className="pointer-events-none absolute inset-0 opacity-60"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 50%, var(--electric-glow), transparent 60%)",
+        }}
+      />
+      <div className="relative mx-auto max-w-4xl px-5 text-center sm:px-8">
+        <h2 data-reveal className="opacity-0 translate-y-4 transition-all duration-700 text-3xl font-black tracking-tight sm:text-5xl">
+          O próximo cliente da sua empresa pode estar a uma pesquisa de distância.
+        </h2>
+        <p data-reveal className="opacity-0 translate-y-4 transition-all duration-700 delay-100 mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
+          Vamos criar uma presença digital que transmite confiança, gera autoridade e converte visitantes em clientes.
+        </p>
+        <div data-reveal className="opacity-0 translate-y-4 transition-all duration-700 delay-200 mt-8 flex justify-center">
+          <a
+            href={WHATSAPP_URL}
+            className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110 hover:shadow-[0_0_50px_-5px_var(--electric-glow)] sm:text-base"
+          >
+            <Phone className="h-4 w-4" />
+            Pedir Orçamento no WhatsApp
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- FOOTER ---------------- */
+function Footer() {
+  return (
+    <footer className="border-t border-border bg-secondary/30">
+      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8">
+        <div className="grid gap-10 md:grid-cols-4">
+          <div>
+            <div className="flex items-center gap-2 font-bold">
+              <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary text-primary-foreground">
+                <Zap className="h-4 w-4" />
+              </span>
+              NexByte
+            </div>
+            <p className="mt-4 text-sm text-muted-foreground">
+              Agência web em Portugal. Websites, landing pages e presença digital para empresas que querem crescer.
+            </p>
+          </div>
+          <FooterCol title="Empresa" items={["Sobre", "Projetos", "Blog", "Contacto"]} />
+          <FooterCol title="Serviços" items={["Websites", "Landing Pages", "Google Business", "SEO", "Branding"]} />
+          <div>
+            <div className="text-sm font-semibold">Contacto</div>
+            <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+              <li className="flex items-center gap-2"><Phone className="h-3.5 w-3.5" /> WhatsApp</li>
+              <li className="flex items-center gap-2"><Mail className="h-3.5 w-3.5" /> ola@nexbyte.pt</li>
+            </ul>
+            <div className="mt-5 flex gap-2">
+              {[Instagram, Facebook, Linkedin].map((Ic, i) => (
+                <a key={i} href="#" className="grid h-9 w-9 place-items-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary" aria-label="social">
+                  <Ic className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center">
+          <div>© {new Date().getFullYear()} NexByte. Todos os direitos reservados.</div>
+          <div>Feito com precisão em Portugal.</div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function FooterCol({ title, items }: { title: string; items: string[] }) {
+  return (
+    <div>
+      <div className="text-sm font-semibold">{title}</div>
+      <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+        {items.map((i) => (
+          <li key={i}><a href="#" className="hover:text-foreground">{i}</a></li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/* ---------------- SECTION WRAPPER ---------------- */
+function Section({
+  id,
+  eyebrow,
+  title,
+  children,
+}: {
+  id?: string;
+  eyebrow: string;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section id={id} className="py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="mb-10 max-w-2xl sm:mb-14">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs uppercase tracking-wider text-muted-foreground">
+            <span className="h-1 w-1 rounded-full bg-primary" />
+            {eyebrow}
+          </div>
+          <h2 data-reveal className="opacity-0 translate-y-4 transition-all duration-700 mt-4 text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl">
+            {title}
+          </h2>
+        </div>
+        {children}
+      </div>
+    </section>
   );
 }
