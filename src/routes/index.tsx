@@ -433,7 +433,7 @@ function Portfolio() {
       hue: 240,
       image: auroraImg,
       description:
-        "Redesign completo do site institucional com foco em portefólio visual imersivo e captação de clientes premium.",
+        "Presença digital minimalista para um estúdio de arquitetura premiado, focada em visual impactante e UX fluida.",
       results: [
         { value: "+218%", label: "pedidos de orçamento" },
         { value: "1.4s", label: "tempo de carregamento" },
@@ -452,7 +452,7 @@ function Portfolio() {
       hue: 20,
       image: novaImg,
       description:
-        "Landing page para o lançamento da linha de cafés de especialidade, com integração de reservas e newsletter.",
+        "Landing page vibrante para uma marca de café artesanal, otimizada para subscrições e pedidos rápidos.",
       results: [
         { value: "+312%", label: "subscrições no 1º mês" },
         { value: "6.8%", label: "taxa de conversão" },
@@ -471,7 +471,7 @@ function Portfolio() {
       hue: 310,
       image: velaImg,
       description:
-        "E-commerce completo com catálogo, checkout otimizado e integração com o stock da loja física.",
+        "Loja online sofisticada com navegação intuitiva, focada na experiência de luxo e conversão de vendas mobile.",
       results: [
         { value: "+165%", label: "vendas online" },
         { value: "-41%", label: "abandono de carrinho" },
@@ -490,7 +490,7 @@ function Portfolio() {
       hue: 200,
       image: norteImg,
       description:
-        "Website institucional, blog jurídico e otimização para pesquisas locais em Braga e distrito.",
+        "Portal jurídico de alta autoridade, focado em clareza informativa e geração de leads qualificados via SEO local.",
       results: [
         { value: "#1", label: "Google 'advogado Braga'" },
         { value: "+520%", label: "tráfego orgânico" },
@@ -505,8 +505,8 @@ function Portfolio() {
   return (
     <Section id="projetos" eyebrow="Portefólio" title="Projetos recentes.">
       <p className="-mt-6 mb-10 max-w-2xl text-muted-foreground">
-        Uma seleção de projetos entregues a clientes em Portugal. Cada um pensado para gerar
-        resultados mensuráveis: mais leads, mais vendas, mais visibilidade.
+        Projetos reais, resultados extraordinários. Conheça algumas das soluções digitais que
+        desenvolvemos para transformar o negócio dos nossos clientes.
       </p>
       <div className="grid gap-6 lg:grid-cols-2">
         {projects.map((p, i) => (
