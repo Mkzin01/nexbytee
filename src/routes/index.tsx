@@ -590,64 +590,61 @@ function Portfolio() {
   );
 }
 
-function ProjectMockup({ type }: { type: Project["mockup"] }) {
-  if (type === "site") {
-    return (
-      <div className="space-y-2 p-4">
-        <div className="h-2 w-1/3 rounded bg-white/40" />
-        <div className="h-2 w-1/2 rounded bg-white/20" />
-        <div className="mt-3 grid grid-cols-3 gap-2">
-          <div className="aspect-square rounded bg-white/15" />
-          <div className="aspect-square rounded bg-white/10" />
-          <div className="aspect-square rounded bg-white/15" />
-        </div>
-      </div>
-    );
-  }
-  if (type === "landing") {
-    return (
-      <div className="space-y-2 p-4">
-        <div className="h-3 w-2/3 rounded bg-white/40" />
-        <div className="h-2 w-1/2 rounded bg-white/20" />
-        <div className="mt-2 h-7 w-24 rounded-md bg-white/70" />
-        <div className="mt-3 flex gap-2">
-          <div className="h-8 flex-1 rounded bg-white/10" />
-          <div className="h-8 flex-1 rounded bg-white/10" />
-        </div>
-      </div>
-    );
-  }
-  if (type === "shop") {
-    return (
-      <div className="p-4">
-        <div className="mb-2 flex items-center justify-between">
-          <div className="h-2 w-16 rounded bg-white/30" />
-          <ShoppingBag className="h-3 w-3 text-white/60" />
-        </div>
-        <div className="grid grid-cols-3 gap-1.5">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="space-y-1">
-              <div className="aspect-square rounded bg-white/15" />
-              <div className="h-1 w-2/3 rounded bg-white/20" />
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
+function ProjectMockup({ type, image }: { type: Project["mockup"]; image: string }) {
+  const overlay = (
+    <div className="absolute inset-0 z-10 bg-black/20" />
+  );
+  
+  const browserHeader = (
+    <div className="flex items-center gap-1.5 border-b border-white/10 px-3 py-2 bg-black/40 backdrop-blur-md">
+      <span className="h-2 w-2 rounded-full bg-white/30" />
+      <span className="h-2 w-2 rounded-full bg-white/30" />
+      <span className="h-2 w-2 rounded-full bg-white/30" />
+    </div>
+  );
+
   return (
-    <div className="space-y-2 p-4">
-      <div className="flex items-center gap-1.5">
-        <Search className="h-3 w-3 text-white/50" />
-        <div className="h-2 flex-1 rounded bg-white/20" />
-      </div>
-      <div className="mt-2 space-y-1.5">
-        {[70, 55, 60].map((w, i) => (
-          <div key={i} className="rounded bg-white/10 p-1.5">
-            <div className="h-1.5 rounded bg-white/40" style={{ width: `${w}%` }} />
-            <div className="mt-1 h-1 w-1/3 rounded bg-white/20" />
+    <div className="relative h-full w-full group/mockup">
+      <img 
+        src={image} 
+        alt="Preview" 
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover/mockup:scale-105" 
+      />
+      {overlay}
+      
+      <div className="absolute inset-0 z-20 flex flex-col">
+        {type === "site" && (
+          <div className="mt-auto p-4 bg-gradient-to-t from-black/80 to-transparent">
+            <div className="h-1.5 w-1/3 rounded bg-white/60" />
+            <div className="mt-1 h-1 w-1/2 rounded bg-white/30" />
           </div>
-        ))}
+        )}
+        
+        {type === "landing" && (
+          <div className="m-auto text-center p-4">
+            <div className="h-3 w-3/4 mx-auto rounded bg-white/80" />
+            <div className="mt-2 h-6 w-20 mx-auto rounded-md bg-primary/90" />
+          </div>
+        )}
+        
+        {type === "shop" && (
+          <div className="absolute top-3 right-3 h-8 w-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center">
+            <ShoppingBag className="h-4 w-4 text-white" />
+          </div>
+        )}
+        
+        {type === "seo" && (
+          <div className="m-auto w-4/5 space-y-2 rounded-xl border border-white/10 bg-black/60 p-3 backdrop-blur-md">
+            <div className="flex items-center gap-2">
+              <Search className="h-3 w-3 text-primary" />
+              <div className="h-1.5 flex-1 rounded bg-white/20" />
+            </div>
+            <div className="space-y-1">
+              <div className="h-1.5 w-2/3 rounded bg-white/40" />
+              <div className="h-1 w-1/2 rounded bg-white/20" />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
