@@ -587,13 +587,18 @@ function Portfolio() {
   );
 }
 
-function ProjectMockup({ type, image }: { type: Project["mockup"]; image: string }) {
+function ProjectMockup({ type, image, name }: { type: Project["mockup"]; image: string; name: string }) {
+  const isVela = name === "Vela Boutique";
+  const isNorte = name === "Norte Advogados";
+
   return (
     <div className="relative h-full w-full group/mockup">
-      <img 
-        src={image} 
-        alt="Preview" 
-        className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover/mockup:scale-105" 
+      <img
+        src={image}
+        alt="Preview"
+        className={`absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover/mockup:scale-105 ${
+          isVela ? "object-[center_20%]" : isNorte ? "object-[center_15%]" : "object-top"
+        }`}
       />
       <div className="absolute inset-0 z-10 bg-black/10" />
     </div>
