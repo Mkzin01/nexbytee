@@ -522,26 +522,24 @@ function Portfolio() {
             className="group flex flex-col opacity-0 translate-y-4 transition-all duration-500 overflow-hidden rounded-2xl border border-border bg-card hover:border-primary/40"
           >
             <div
-              className="relative aspect-[16/10] overflow-hidden"
+              className="relative aspect-video overflow-hidden"
               style={{
                 background: `radial-gradient(circle at 30% 20%, oklch(0.55 0.2 ${p.hue}) 0%, oklch(0.18 0.02 260) 70%)`,
               }}
             >
               <div className="grid-bg absolute inset-0 opacity-30" />
-              <div className="absolute inset-4 sm:inset-6 rounded-xl border border-white/10 bg-black/40 backdrop-blur-sm overflow-hidden flex flex-col">
-                <div className="flex items-center gap-1.5 border-b border-white/10 px-3 py-2 bg-black/20">
-                  <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
-                  <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
-                  <span className="h-1.5 w-1.5 rounded-full bg-white/30" />
-                  <span className="ml-2 truncate text-[9px] font-mono text-white/30 uppercase tracking-widest">
-                    {p.name.toLowerCase().replace(/\s+/g, "")}.pt
-                  </span>
-                </div>
-                <div className="relative flex-1 overflow-hidden">
-                  <ProjectMockup type={p.mockup} image={p.image} />
-                </div>
+              <div className="absolute inset-0 overflow-hidden flex flex-col">
+                <ProjectMockup type={p.mockup} image={p.image} />
               </div>
-              <div className="absolute left-4 top-4 flex gap-2 sm:left-6 sm:top-6">
+              <div className="absolute left-4 top-4 flex gap-2 sm:left-6 sm:top-6 z-30">
+                <span className="rounded-full bg-black/60 px-2.5 py-1 text-[10px] font-medium text-white/90 backdrop-blur">
+                  {p.year}
+                </span>
+                <span className="rounded-full bg-primary/90 px-2.5 py-1 text-[10px] font-medium text-primary-foreground">
+                  {p.tag}
+                </span>
+              </div>
+            </div>
                 <span className="rounded-full bg-black/60 px-2.5 py-1 text-[10px] font-medium text-white/90 backdrop-blur">
                   {p.year}
                 </span>
