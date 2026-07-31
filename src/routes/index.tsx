@@ -6,15 +6,11 @@ import {
   Zap, ShieldCheck, Code2, Smartphone, Plus, Minus, Star,
 } from "lucide-react";
 import heroMockup from "@/assets/hero-nexbyte.jpg.asset.json";
-import auroraAsset from "@/assets/portfolio/aurora.png.asset.json";
-import novaAsset from "@/assets/portfolio/nova.png.asset.json";
-import velaAsset from "@/assets/portfolio/vela.png.asset.json";
-import norteAsset from "@/assets/portfolio/norte.png.asset.json";
+import auroraImg from "@/assets/portfolio/aurora.jpg";
+import novaImg from "@/assets/portfolio/nova.jpg";
+import velaImg from "@/assets/portfolio/vela.jpg";
+import norteImg from "@/assets/portfolio/norte.jpg";
 
-const auroraImg = auroraAsset.url;
-const novaImg = novaAsset.url;
-const velaImg = velaAsset.url;
-const norteImg = norteAsset.url;
 
 const WHATSAPP_URL = "https://wa.me/351000000000?text=Ol%C3%A1%20NexByte%2C%20quero%20um%20or%C3%A7amento";
 
@@ -650,8 +646,11 @@ function ProjectMockup({ type, image, name }: { type: Project["mockup"]; image: 
         src={image}
         alt={`Preview do projeto ${name}`}
         loading="lazy"
-        className="absolute inset-0 h-full w-full object-contain object-center transition-transform duration-700 group-hover/mockup:scale-105"
+        width={1600}
+        height={900}
+        className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover/mockup:scale-105"
       />
+
       <div className="pointer-events-none absolute inset-0 z-10 bg-black/10" />
     </div>
   );
