@@ -893,11 +893,12 @@ function LandingSection() {
 /* ---------------- LOGO SECTION ---------------- */
 function LogoSection() {
   const marks = [
-    { label: "Aurora Studio", tag: "Arquitetura", glyph: "A", icon: Sparkles },
-    { label: "Nova Café", tag: "Restauração", glyph: "N", icon: Zap },
-    { label: "Vela Boutique", tag: "Moda", glyph: "V", icon: ShoppingBag },
-    { label: "Norte Advogados", tag: "Jurídico", glyph: "NA", icon: ShieldCheck },
+    { label: "Aurora Studio", tag: "Arquitetura", logo: auroraLogo },
+    { label: "Nova Café", tag: "Restauração", logo: novaLogo },
+    { label: "Vela Boutique", tag: "Moda", logo: velaLogo },
+    { label: "Norte Advogados", tag: "Jurídico", logo: norteLogo },
   ];
+
   const deliverables = [
     "Logótipo principal",
     "Versões horizontal e vertical",
