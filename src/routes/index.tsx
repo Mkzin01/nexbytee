@@ -225,24 +225,22 @@ function Nav({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => void }
 function Hero() {
   return (
     <section className="relative overflow-hidden pt-24 pb-14 sm:pt-32 sm:pb-20">
-      <div className="grid-bg pointer-events-none absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
+      <div className="grid-bg-animated pointer-events-none absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
       <div
-        className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[900px] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
+        className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[900px] -translate-x-1/2 rounded-full opacity-40 blur-3xl float-slow"
         style={{ background: "radial-gradient(closest-side, var(--electric-glow), transparent)" }}
       />
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
           <div data-reveal className="opacity-0 translate-y-4 transition-all duration-700">
-            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs text-muted-foreground">
-              <span className="grid h-1.5 w-1.5 place-items-center rounded-full bg-primary shadow-[0_0_10px_var(--electric)]" />
+            <div className="relative inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs text-muted-foreground">
+              <span className="relative grid h-1.5 w-1.5 place-items-center rounded-full bg-primary shadow-[0_0_10px_var(--electric)] pulse-ring" />
               Atendemos empresas em todo Portugal
             </div>
             <h1 className="mt-5 text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl">
               Criamos websites que{" "}
               <span className="relative whitespace-nowrap">
-                <span className="bg-gradient-to-r from-primary to-[oklch(0.75_0.18_240)] bg-clip-text text-transparent">
-                  fazem empresas
-                </span>
+                <span className="text-gradient-tech">fazem empresas</span>
               </span>{" "}
               crescer.
             </h1>
