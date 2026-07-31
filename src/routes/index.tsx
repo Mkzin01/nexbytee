@@ -12,6 +12,11 @@ import auroraImg from "@/assets/portfolio/aurora.jpg";
 import novaImg from "@/assets/portfolio/nova.jpg";
 import velaImg from "@/assets/portfolio/vela.jpg";
 import norteImg from "@/assets/portfolio/norte.jpg";
+import auroraLogo from "@/assets/logos/aurora-logo.png";
+import novaLogo from "@/assets/logos/nova-logo.png";
+import velaLogo from "@/assets/logos/vela-logo.png";
+import norteLogo from "@/assets/logos/norte-logo.png";
+
 
 
 const WHATSAPP_URL = "https://wa.me/351000000000?text=Ol%C3%A1%20NexByte%2C%20quero%20um%20or%C3%A7amento";
@@ -893,11 +898,12 @@ function LandingSection() {
 /* ---------------- LOGO SECTION ---------------- */
 function LogoSection() {
   const marks = [
-    { label: "Aurora Studio", tag: "Arquitetura", glyph: "A", icon: Sparkles },
-    { label: "Nova Café", tag: "Restauração", glyph: "N", icon: Zap },
-    { label: "Vela Boutique", tag: "Moda", glyph: "V", icon: ShoppingBag },
-    { label: "Norte Advogados", tag: "Jurídico", glyph: "NA", icon: ShieldCheck },
+    { label: "Aurora Studio", tag: "Arquitetura", logo: auroraLogo },
+    { label: "Nova Café", tag: "Restauração", logo: novaLogo },
+    { label: "Vela Boutique", tag: "Moda", logo: velaLogo },
+    { label: "Norte Advogados", tag: "Jurídico", logo: norteLogo },
   ];
+
   const deliverables = [
     "Logótipo principal",
     "Versões horizontal e vertical",
@@ -982,10 +988,17 @@ function LogoSection() {
               >
                 <div className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
                 <div className="flex h-full flex-col items-center justify-center gap-2">
-                  <div className="relative grid h-14 w-14 place-items-center rounded-xl border border-border bg-background transition-all duration-500 group-hover:border-primary/50 group-hover:shadow-[0_0_28px_-6px_var(--electric-glow)]">
-                    <span className="text-gradient-tech text-xl font-black tracking-tight">{m.glyph}</span>
-                    <m.icon className="absolute -bottom-1.5 -right-1.5 h-4 w-4 rounded-md bg-card p-0.5 text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="relative flex h-20 w-full items-center justify-center rounded-xl border border-border bg-background p-2.5 transition-all duration-500 group-hover:border-primary/50 group-hover:shadow-[0_0_28px_-6px_var(--electric-glow)]">
+                    <img
+                      src={m.logo}
+                      alt={`Logótipo ${m.label}`}
+                      loading="lazy"
+                      width={1024}
+                      height={1024}
+                      className="h-full w-full object-contain opacity-80 invert transition-all duration-500 group-hover:opacity-100"
+                    />
                   </div>
+
                   <div className="text-center">
                     <div className="text-xs font-semibold">{m.label}</div>
                     <div className="text-[10px] uppercase tracking-wider text-muted-foreground">{m.tag}</div>
