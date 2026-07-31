@@ -5,7 +5,7 @@ import {
   Palette, TrendingUp, Menu, X, Phone, Mail, Instagram, Facebook, Linkedin,
   Zap, ShieldCheck, Code2, Smartphone, Plus, Minus, Star,
 } from "lucide-react";
-import heroMockup from "@/assets/hero-mockup.jpg";
+import heroMockup from "@/assets/hero-nexbyte.jpg.asset.json";
 import auroraAsset from "@/assets/portfolio/aurora.png.asset.json";
 import novaAsset from "@/assets/portfolio/nova.png.asset.json";
 import velaAsset from "@/assets/portfolio/vela.png.asset.json";
