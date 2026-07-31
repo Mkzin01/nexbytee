@@ -451,7 +451,7 @@ function Process() {
             key={t}
             data-reveal
             style={{ transitionDelay: `${i * 60}ms` }}
-            className="opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-5"
+            className="card-tech group opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-5 transition-transform hover:-translate-y-1"
           >
             <div className="flex items-center gap-3">
               <span className="grid h-8 w-8 place-items-center rounded-full bg-primary/15 text-xs font-bold text-primary">
@@ -575,7 +575,7 @@ function Portfolio() {
             key={p.name}
             data-reveal
             style={{ transitionDelay: `${i * 70}ms` }}
-            className="group flex flex-col opacity-0 translate-y-4 transition-all duration-500 overflow-hidden rounded-2xl border border-border bg-card hover:border-primary/40"
+            className="group flex flex-col opacity-0 translate-y-4 transition-all duration-500 overflow-hidden rounded-2xl border border-border bg-card hover:border-primary/40 hover:-translate-y-1 hover:shadow-[0_18px_50px_-24px_var(--electric-glow)] card-tech"
           >
             <div
               className="relative aspect-video overflow-hidden"
@@ -681,7 +681,7 @@ function WhyUs() {
             key={it.t}
             data-reveal
             style={{ transitionDelay: `${(i % 4) * 60}ms` }}
-            className="opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-5"
+            className="card-tech group opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-5 transition-transform hover:-translate-y-1"
           >
             <it.icon className="h-5 w-5 text-primary" />
             <div className="mt-3 font-semibold">{it.t}</div>
@@ -751,7 +751,7 @@ function LandingSection() {
             key={c.t}
             data-reveal
             style={{ transitionDelay: `${i * 60}ms` }}
-            className="opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-6"
+            className="card-tech group opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-6 transition-transform hover:-translate-y-1"
           >
             <TrendingUp className="h-5 w-5 text-primary" />
             <h3 className="mt-3 font-semibold">{c.t}</h3>
