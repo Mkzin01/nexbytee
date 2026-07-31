@@ -988,10 +988,17 @@ function LogoSection() {
               >
                 <div className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
                 <div className="flex h-full flex-col items-center justify-center gap-2">
-                  <div className="relative grid h-14 w-14 place-items-center rounded-xl border border-border bg-background transition-all duration-500 group-hover:border-primary/50 group-hover:shadow-[0_0_28px_-6px_var(--electric-glow)]">
-                    <span className="text-gradient-tech text-xl font-black tracking-tight">{m.glyph}</span>
-                    <m.icon className="absolute -bottom-1.5 -right-1.5 h-4 w-4 rounded-md bg-card p-0.5 text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="relative flex h-20 w-full items-center justify-center rounded-xl border border-border bg-background p-2.5 transition-all duration-500 group-hover:border-primary/50 group-hover:shadow-[0_0_28px_-6px_var(--electric-glow)]">
+                    <img
+                      src={m.logo}
+                      alt={`Logótipo ${m.label}`}
+                      loading="lazy"
+                      width={1024}
+                      height={1024}
+                      className="h-full w-full object-contain opacity-80 invert transition-all duration-500 group-hover:opacity-100"
+                    />
                   </div>
+
                   <div className="text-center">
                     <div className="text-xs font-semibold">{m.label}</div>
                     <div className="text-[10px] uppercase tracking-wider text-muted-foreground">{m.tag}</div>
