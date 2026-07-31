@@ -316,11 +316,12 @@ function Stats() {
     { v: 40, s: "+", l: "projetos para grandes empresas" },
   ];
   return (
-    <section className="border-y border-border bg-secondary/30">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-y-8 gap-x-4 px-5 py-12 sm:px-8 md:grid-cols-4">
+    <section className="relative overflow-hidden border-y border-border bg-secondary/30">
+      <div className="grid-bg-animated pointer-events-none absolute inset-0 opacity-30" />
+      <div className="relative mx-auto grid max-w-7xl grid-cols-2 gap-y-8 gap-x-4 px-5 py-12 sm:px-8 md:grid-cols-4">
         {items.map((it, i) => (
-          <div key={i} data-reveal className="opacity-0 translate-y-4 transition-all duration-500" style={{ transitionDelay: `${i * 80}ms` }}>
-            <div className="text-3xl font-black tracking-tight text-foreground sm:text-4xl">
+          <div key={i} data-reveal className="group opacity-0 translate-y-4 transition-all duration-500" style={{ transitionDelay: `${i * 80}ms` }}>
+            <div className="text-3xl font-black tracking-tight text-foreground transition-all duration-300 group-hover:text-primary group-hover:drop-shadow-[0_0_16px_var(--electric-glow)] sm:text-4xl">
               <CountUp to={it.v} suffix={it.s} />
             </div>
             <div className="mt-1 text-xs text-muted-foreground sm:text-sm">{it.l}</div>
