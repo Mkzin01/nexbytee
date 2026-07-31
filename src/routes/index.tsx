@@ -4,7 +4,9 @@ import {
   ArrowRight, Check, Globe, Rocket, MapPin, ShoppingBag, Sparkles, Search,
   Palette, TrendingUp, Menu, X, Phone, Mail, Instagram, Facebook, Linkedin,
   Zap, ShieldCheck, Code2, Smartphone, Plus, Minus, Star,
+  Navigation as NavigationIcon,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 import heroMockup from "@/assets/hero-nexbyte.jpg.asset.json";
 import auroraImg from "@/assets/portfolio/aurora.jpg";
 import novaImg from "@/assets/portfolio/nova.jpg";
@@ -691,47 +693,172 @@ function WhyUs() {
 
 /* ---------------- GOOGLE BUSINESS ---------------- */
 function GoogleBusiness() {
-  const perks = ["Mais visibilidade local", "Mais chamadas", "Mais rotas até si", "Mais clientes"];
+  const perks = [
+    { icon: Search, t: "Mais visibilidade local", d: "Topo do mapa nas pesquisas da sua zona." },
+    { icon: Phone, t: "Mais chamadas", d: "Botão de contacto direto no perfil." },
+    { icon: NavigationIcon, t: "Mais rotas até si", d: "Clientes a um toque da sua porta." },
+    { icon: Star, t: "Mais avaliações", d: "Reputação que gera confiança imediata." },
+  ];
+
+  const ranking = [
+    { pos: 3, name: "Concorrente A", rating: "4,2", active: false },
+    { pos: 2, name: "Concorrente B", rating: "4,5", active: false },
+    { pos: 1, name: "A sua Empresa", rating: "4,9", active: true },
+  ];
+
   return (
     <Section eyebrow="Google Business" title="Apareça no topo do mapa. Literalmente.">
-      <div className="grid gap-8 rounded-2xl border border-border bg-card p-6 md:grid-cols-2 md:p-10">
-        <div>
-          <p className="text-muted-foreground">
-            Desenvolvemos e otimizamos o seu perfil do Google Business para que a sua empresa apareça primeiro
-            quando um cliente pesquisa pelos seus serviços na sua zona.
-          </p>
-          <ul className="mt-6 space-y-3">
-            {perks.map((p) => (
-              <li key={p} className="flex items-center gap-2 text-sm">
-                <span className="grid h-5 w-5 place-items-center rounded-full bg-primary/15 text-primary">
-                  <Check className="h-3 w-3" />
+      <div className="card-tech relative overflow-hidden rounded-2xl border border-border bg-card p-6 md:p-10">
+        <div className="scan-beam pointer-events-none absolute inset-0 z-0" />
+        <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
+
+        <div className="relative z-10 grid gap-10 md:grid-cols-2 md:items-center">
+          {/* ---- Left: copy + perks + ranking ---- */}
+          <div>
+            <p className="text-muted-foreground">
+              Desenvolvemos e otimizamos o seu perfil do Google Business para que a sua empresa apareça primeiro
+              quando um cliente pesquisa pelos seus serviços na sua zona.
+            </p>
+
+            <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+              {perks.map((p) => (
+                <li
+                  key={p.t}
+                  className="group flex gap-3 rounded-xl border border-border/60 bg-background/40 p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-background"
+                >
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary transition-transform duration-300 group-hover:scale-110">
+                    <p.icon className="h-4 w-4" />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold">{p.t}</span>
+                    <span className="block text-xs text-muted-foreground">{p.d}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-6 grid grid-cols-3 gap-3">
+              {[
+                { v: 3, s: "x", l: "mais chamadas" },
+                { v: 128, s: "", l: "avaliações" },
+                { v: 92, s: "%", l: "cliques locais" },
+              ].map((m) => (
+                <div key={m.l} className="rounded-xl border border-border/60 bg-background/40 p-3 text-center">
+                  <div className="text-xl font-bold text-gradient-tech sm:text-2xl">
+                    <CountUp to={m.v} suffix={m.s} />
+                  </div>
+                  <div className="mt-0.5 text-[11px] leading-tight text-muted-foreground">{m.l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ---- Right: live profile mock ---- */}
+          <div className="space-y-3">
+            <div className="relative overflow-hidden rounded-xl border border-border bg-background p-4 glow-electric">
+              <div className="flex items-center gap-3 border-b border-border pb-3">
+                <div className="pulse-ring relative grid h-10 w-10 place-items-center rounded-lg bg-primary/20 text-primary">
+                  <MapPin className="h-5 w-5" />
+                </div>
+                <div className="min-w-0">
+                  <div className="truncate text-sm font-semibold">A sua Empresa • Portugal</div>
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <span className="font-semibold text-foreground">4,9</span>
+                    <span className="flex gap-0.5 text-primary">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star key={i} className="h-3 w-3 fill-current" />
+                      ))}
+                    </span>
+                    <span>· 128 avaliações</span>
+                  </div>
+                </div>
+                <span className="ml-auto hidden shrink-0 items-center gap-1 rounded-full border border-primary/30 bg-primary/10 px-2 py-1 text-[10px] font-semibold text-primary sm:flex">
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+                  Aberto agora
                 </span>
-                {p}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="relative overflow-hidden rounded-xl border border-border bg-background p-4">
-          <div className="flex items-center gap-3 border-b border-border pb-3">
-            <div className="grid h-10 w-10 place-items-center rounded-lg bg-primary/20 text-primary">
-              <MapPin className="h-5 w-5" />
+              </div>
+
+              <div className="mt-3 grid grid-cols-3 gap-2 text-center text-xs">
+                {[
+                  { l: "Ligar", i: Phone },
+                  { l: "Rota", i: NavigationIcon },
+                  { l: "Website", i: Globe },
+                ].map((a) => (
+                  <div
+                    key={a.l}
+                    className="flex cursor-default items-center justify-center gap-1.5 rounded-lg bg-secondary py-2 text-foreground transition-colors duration-300 hover:bg-primary hover:text-primary-foreground"
+                  >
+                    <a.i className="h-3.5 w-3.5" />
+                    {a.l}
+                  </div>
+                ))}
+              </div>
+
+              {/* animated radar map */}
+              <div className="relative mt-3 h-36 overflow-hidden rounded-lg border border-border grid-bg-animated">
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                  <div className="pulse-ring relative grid h-8 w-8 place-items-center rounded-full bg-primary text-primary-foreground shadow-lg">
+                    <MapPin className="h-4 w-4" />
+                  </div>
+                </div>
+                {[
+                  "left-[18%] top-[26%]",
+                  "left-[74%] top-[34%]",
+                  "left-[30%] top-[70%]",
+                  "left-[66%] top-[74%]",
+                ].map((pos, i) => (
+                  <span
+                    key={pos}
+                    className={cn("absolute h-2 w-2 animate-pulse rounded-full bg-primary/40", pos)}
+                    style={{ animationDelay: `${i * 0.4}s` }}
+                  />
+                ))}
+              </div>
             </div>
-            <div>
-              <div className="text-sm font-semibold">A sua Empresa • Portugal</div>
-              <div className="text-xs text-muted-foreground">4,9 ★ ★ ★ ★ ★ · 128 avaliações</div>
+
+            {/* ranking list */}
+            <div className="rounded-xl border border-border bg-background p-4">
+              <div className="mb-2 flex items-center gap-2 text-xs text-muted-foreground">
+                <Search className="h-3.5 w-3.5 text-primary" />
+                “o seu serviço perto de mim”
+              </div>
+              <ul className="space-y-2">
+                {ranking.map((r) => (
+                  <li
+                    key={r.name}
+                    className={cn(
+                      "flex items-center gap-3 rounded-lg border px-3 py-2 text-sm transition-all duration-500",
+                      r.active
+                        ? "border-primary/50 bg-primary/10 font-semibold text-foreground"
+                        : "border-border/50 bg-secondary/40 text-muted-foreground",
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        "grid h-6 w-6 shrink-0 place-items-center rounded-md text-xs font-bold",
+                        r.active ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground",
+                      )}
+                    >
+                      {r.pos}
+                    </span>
+                    <span className="truncate">{r.name}</span>
+                    <span className="ml-auto flex shrink-0 items-center gap-1 text-xs">
+                      <Star className={cn("h-3 w-3", r.active ? "fill-primary text-primary" : "text-muted-foreground")} />
+                      {r.rating}
+                    </span>
+                    {r.active && <TrendingUp className="h-4 w-4 shrink-0 text-primary" />}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-          <div className="mt-3 grid grid-cols-3 gap-2 text-center text-xs">
-            {["Ligar", "Rota", "Website"].map((a) => (
-              <div key={a} className="rounded-lg bg-secondary py-2 text-foreground">{a}</div>
-            ))}
-          </div>
-          <div className="mt-3 h-32 rounded-lg grid-bg border border-border" />
         </div>
       </div>
     </Section>
   );
 }
+
 
 /* ---------------- LANDING SECTION ---------------- */
 function LandingSection() {
