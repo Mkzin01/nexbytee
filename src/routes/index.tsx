@@ -131,6 +131,8 @@ function Index() {
       <WhyUs />
       <GoogleBusiness />
       <LandingSection />
+      <LogoSection />
+
       <FAQ />
       <FinalCTA />
       <Footer />
