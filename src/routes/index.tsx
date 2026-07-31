@@ -73,16 +73,59 @@ function CountUp({ to, suffix = "", duration = 1600 }: { to: number; suffix?: st
   return <span ref={ref}>{n.toLocaleString("pt-PT")}{suffix}</span>;
 }
 
+function ScrollProgress() {
+  const [p, setP] = useState(0);
+  useEffect(() => {
+    const on = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      setP(max > 0 ? (h.scrollTop / max) * 100 : 0);
+    };
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
+  return (
+    <div className="fixed inset-x-0 top-0 z-[60] h-0.5 bg-transparent">
+      <div
+        className="h-full bg-gradient-to-r from-primary to-[oklch(0.85_0.13_220)] shadow-[0_0_12px_var(--electric-glow)] transition-[width] duration-150"
+        style={{ width: `${p}%` }}
+      />
+    </div>
+  );
+}
+
+function TechMarquee() {
+  const items = [
+    "React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js", "SEO técnico",
+    "Core Web Vitals", "Figma", "Supabase", "Google Analytics", "Cloudflare", "WordPress",
+  ];
+  return (
+    <div className="relative overflow-hidden border-b border-border bg-background py-4 [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+      <div className="marquee-track flex w-max gap-10">
+        {[...items, ...items].map((t, i) => (
+          <span key={i} className="flex shrink-0 items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+            <span className="h-1 w-1 rounded-full bg-primary shadow-[0_0_8px_var(--electric)]" />
+            {t}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function Index() {
   useReveal();
   const [navOpen, setNavOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <ScrollProgress />
       <Nav open={navOpen} setOpen={setNavOpen} />
 
       <Hero />
       <Stats />
+      <TechMarquee />
       <Services />
       <Plans />
       <Process />
@@ -96,6 +139,7 @@ function Index() {
     </div>
   );
 }
+
 
 /* ---------------- NAV ---------------- */
 function Nav({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => void }) {
@@ -181,24 +225,22 @@ function Nav({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => void }
 function Hero() {
   return (
     <section className="relative overflow-hidden pt-24 pb-14 sm:pt-32 sm:pb-20">
-      <div className="grid-bg pointer-events-none absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
+      <div className="grid-bg-animated pointer-events-none absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
       <div
-        className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[900px] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
+        className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[900px] -translate-x-1/2 rounded-full opacity-40 blur-3xl float-slow"
         style={{ background: "radial-gradient(closest-side, var(--electric-glow), transparent)" }}
       />
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
           <div data-reveal className="opacity-0 translate-y-4 transition-all duration-700">
-            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs text-muted-foreground">
-              <span className="grid h-1.5 w-1.5 place-items-center rounded-full bg-primary shadow-[0_0_10px_var(--electric)]" />
+            <div className="relative inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs text-muted-foreground">
+              <span className="relative grid h-1.5 w-1.5 place-items-center rounded-full bg-primary shadow-[0_0_10px_var(--electric)] pulse-ring" />
               Atendemos empresas em todo Portugal
             </div>
             <h1 className="mt-5 text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl">
               Criamos websites que{" "}
               <span className="relative whitespace-nowrap">
-                <span className="bg-gradient-to-r from-primary to-[oklch(0.75_0.18_240)] bg-clip-text text-transparent">
-                  fazem empresas
-                </span>
+                <span className="text-gradient-tech">fazem empresas</span>
               </span>{" "}
               crescer.
             </h1>
@@ -236,9 +278,15 @@ function Hero() {
           </div>
 
           <div data-reveal className="opacity-0 translate-y-4 transition-all duration-700 delay-150">
-            <div className="relative">
+            <div className="relative float-slow">
               <div className="absolute -inset-6 rounded-3xl bg-primary/10 blur-3xl" />
-              <div className="relative overflow-hidden rounded-2xl border border-border bg-card glow-electric">
+              <div className="scan-beam relative overflow-hidden rounded-2xl border border-border bg-card glow-electric">
+                <div className="flex items-center gap-1.5 border-b border-border bg-secondary/40 px-3 py-2">
+                  <span className="h-2 w-2 rounded-full bg-muted-foreground/40" />
+                  <span className="h-2 w-2 rounded-full bg-muted-foreground/40" />
+                  <span className="h-2 w-2 rounded-full bg-primary/70" />
+                  <span className="ml-2 font-mono text-[10px] tracking-wider text-muted-foreground">nexbyte.pt</span>
+                </div>
                 <img
                   src={heroMockup}
                   alt="Mockups de websites desenvolvidos pela NexByte"
@@ -246,8 +294,13 @@ function Hero() {
                   loading="eager"
                 />
               </div>
+              <div className="pointer-events-none absolute -bottom-4 -left-4 hidden items-center gap-2 rounded-xl border border-border bg-card/90 px-3 py-2 backdrop-blur sm:flex">
+                <Code2 className="h-4 w-4 text-primary" />
+                <span className="font-mono text-[11px] text-muted-foreground">performance: 98/100</span>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -263,11 +316,12 @@ function Stats() {
     { v: 40, s: "+", l: "projetos para grandes empresas" },
   ];
   return (
-    <section className="border-y border-border bg-secondary/30">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-y-8 gap-x-4 px-5 py-12 sm:px-8 md:grid-cols-4">
+    <section className="relative overflow-hidden border-y border-border bg-secondary/30">
+      <div className="grid-bg-animated pointer-events-none absolute inset-0 opacity-30" />
+      <div className="relative mx-auto grid max-w-7xl grid-cols-2 gap-y-8 gap-x-4 px-5 py-12 sm:px-8 md:grid-cols-4">
         {items.map((it, i) => (
-          <div key={i} data-reveal className="opacity-0 translate-y-4 transition-all duration-500" style={{ transitionDelay: `${i * 80}ms` }}>
-            <div className="text-3xl font-black tracking-tight text-foreground sm:text-4xl">
+          <div key={i} data-reveal className="group opacity-0 translate-y-4 transition-all duration-500" style={{ transitionDelay: `${i * 80}ms` }}>
+            <div className="text-3xl font-black tracking-tight text-foreground transition-all duration-300 group-hover:text-primary group-hover:drop-shadow-[0_0_16px_var(--electric-glow)] sm:text-4xl">
               <CountUp to={it.v} suffix={it.s} />
             </div>
             <div className="mt-1 text-xs text-muted-foreground sm:text-sm">{it.l}</div>
@@ -297,11 +351,12 @@ function Services() {
           <div
             key={s.title}
             data-reveal
-            className="group relative opacity-0 translate-y-4 rounded-xl border border-border bg-card p-5 transition-all duration-500 hover:border-primary/40 hover:-translate-y-0.5"
+            className="card-tech group relative opacity-0 translate-y-4 overflow-hidden rounded-xl border border-border bg-card p-5 transition-all duration-500 hover:border-primary/40 hover:-translate-y-1 hover:shadow-[0_18px_50px_-24px_var(--electric-glow)]"
             style={{ transitionDelay: `${(i % 4) * 60}ms` }}
           >
-            <div className="grid h-10 w-10 place-items-center rounded-lg bg-secondary text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-              <s.icon className="h-5 w-5" />
+            <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="relative grid h-10 w-10 place-items-center rounded-lg bg-secondary text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_24px_-4px_var(--electric-glow)]">
+              <s.icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
             </div>
             <h3 className="mt-4 text-base font-semibold">{s.title}</h3>
             <p className="mt-1.5 text-sm text-muted-foreground">{s.desc}</p>
@@ -396,7 +451,7 @@ function Process() {
             key={t}
             data-reveal
             style={{ transitionDelay: `${i * 60}ms` }}
-            className="opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-5"
+            className="card-tech group opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-5 transition-transform hover:-translate-y-1"
           >
             <div className="flex items-center gap-3">
               <span className="grid h-8 w-8 place-items-center rounded-full bg-primary/15 text-xs font-bold text-primary">
@@ -520,7 +575,7 @@ function Portfolio() {
             key={p.name}
             data-reveal
             style={{ transitionDelay: `${i * 70}ms` }}
-            className="group flex flex-col opacity-0 translate-y-4 transition-all duration-500 overflow-hidden rounded-2xl border border-border bg-card hover:border-primary/40"
+            className="group flex flex-col opacity-0 translate-y-4 transition-all duration-500 overflow-hidden rounded-2xl border border-border bg-card hover:border-primary/40 hover:-translate-y-1 hover:shadow-[0_18px_50px_-24px_var(--electric-glow)] card-tech"
           >
             <div
               className="relative aspect-video overflow-hidden"
@@ -626,7 +681,7 @@ function WhyUs() {
             key={it.t}
             data-reveal
             style={{ transitionDelay: `${(i % 4) * 60}ms` }}
-            className="opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-5"
+            className="card-tech group opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-5 transition-transform hover:-translate-y-1"
           >
             <it.icon className="h-5 w-5 text-primary" />
             <div className="mt-3 font-semibold">{it.t}</div>
@@ -696,7 +751,7 @@ function LandingSection() {
             key={c.t}
             data-reveal
             style={{ transitionDelay: `${i * 60}ms` }}
-            className="opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-6"
+            className="card-tech group opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-6 transition-transform hover:-translate-y-1"
           >
             <TrendingUp className="h-5 w-5 text-primary" />
             <h3 className="mt-3 font-semibold">{c.t}</h3>

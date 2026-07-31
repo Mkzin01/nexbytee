@@ -88,6 +88,146 @@
   background-size: 48px 48px;
 }
 
+@utility grid-bg-animated {
+  background-image:
+    linear-gradient(to right, oklch(1 0 0 / 5%) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(1 0 0 / 5%) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: grid-drift 22s linear infinite;
+}
+
 @utility glow-electric {
   box-shadow: 0 0 40px -8px var(--electric-glow), 0 0 0 1px oklch(1 0 0 / 8%);
+}
+
+/* Animated gradient text */
+@utility text-gradient-tech {
+  background-image: linear-gradient(
+    100deg,
+    var(--electric) 0%,
+    oklch(0.85 0.13 220) 35%,
+    var(--electric) 70%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 6s linear infinite;
+}
+
+/* Card with a rotating conic border that lights up on hover */
+@utility card-tech {
+  position: relative;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--angle, 0deg),
+      transparent 0%,
+      var(--electric) 12%,
+      transparent 28%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    z-index: -1;
+  }
+  &:hover::before {
+    opacity: 1;
+    animation: border-spin 3s linear infinite;
+  }
+}
+
+/* Sweeping light beam across a surface */
+@utility scan-beam {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      oklch(1 0 0 / 10%) 50%,
+      transparent 60%
+    );
+    transform: translateX(-100%);
+    animation: beam-sweep 4.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+@utility float-slow {
+  animation: float-y 7s ease-in-out infinite;
+}
+
+@utility pulse-ring {
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 0 0 0 var(--electric-glow);
+    animation: ring-pulse 2.6s ease-out infinite;
+  }
+}
+
+@utility marquee-track {
+  animation: marquee-x 28s linear infinite;
+}
+
+@keyframes grid-drift {
+  to { background-position: 48px 48px; }
+}
+
+@keyframes gradient-pan {
+  to { background-position: 200% 0; }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-spin {
+  to { --angle: 360deg; }
+}
+
+@keyframes beam-sweep {
+  0% { transform: translateX(-100%); }
+  55%, 100% { transform: translateX(100%); }
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes ring-pulse {
+  0% { box-shadow: 0 0 0 0 var(--electric-glow); }
+  70% { box-shadow: 0 0 0 12px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+@keyframes marquee-x {
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
