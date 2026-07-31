@@ -155,7 +155,9 @@ function Nav({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => void }
     ["Planos", "#planos"],
     ["Processo", "#processo"],
     ["Projetos", "#projetos"],
+    ["Logótipo", "#logotipo"],
     ["FAQ", "#faq"],
+
   ];
   return (
     <header
