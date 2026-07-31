@@ -288,7 +288,7 @@ function Hero() {
                   <span className="ml-2 font-mono text-[10px] tracking-wider text-muted-foreground">nexbyte.pt</span>
                 </div>
                 <img
-                  src={heroMockup}
+                  src={heroMockup.url}
                   alt="Mockups de websites desenvolvidos pela NexByte"
                   className="w-full object-cover"
                   loading="eager"
