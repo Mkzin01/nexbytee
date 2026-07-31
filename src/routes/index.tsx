@@ -73,16 +73,59 @@ function CountUp({ to, suffix = "", duration = 1600 }: { to: number; suffix?: st
   return <span ref={ref}>{n.toLocaleString("pt-PT")}{suffix}</span>;
 }
 
+function ScrollProgress() {
+  const [p, setP] = useState(0);
+  useEffect(() => {
+    const on = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      setP(max > 0 ? (h.scrollTop / max) * 100 : 0);
+    };
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
+  return (
+    <div className="fixed inset-x-0 top-0 z-[60] h-0.5 bg-transparent">
+      <div
+        className="h-full bg-gradient-to-r from-primary to-[oklch(0.85_0.13_220)] shadow-[0_0_12px_var(--electric-glow)] transition-[width] duration-150"
+        style={{ width: `${p}%` }}
+      />
+    </div>
+  );
+}
+
+function TechMarquee() {
+  const items = [
+    "React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js", "SEO técnico",
+    "Core Web Vitals", "Figma", "Supabase", "Google Analytics", "Cloudflare", "WordPress",
+  ];
+  return (
+    <div className="relative overflow-hidden border-b border-border bg-background py-4 [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+      <div className="marquee-track flex w-max gap-10">
+        {[...items, ...items].map((t, i) => (
+          <span key={i} className="flex shrink-0 items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+            <span className="h-1 w-1 rounded-full bg-primary shadow-[0_0_8px_var(--electric)]" />
+            {t}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function Index() {
   useReveal();
   const [navOpen, setNavOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <ScrollProgress />
       <Nav open={navOpen} setOpen={setNavOpen} />
 
       <Hero />
       <Stats />
+      <TechMarquee />
       <Services />
       <Plans />
       <Process />
@@ -96,6 +139,7 @@ function Index() {
     </div>
   );
 }
+
 
 /* ---------------- NAV ---------------- */
 function Nav({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => void }) {
