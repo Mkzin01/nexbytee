@@ -264,7 +264,7 @@ function Hero() {
             </div>
             <div className="mt-8 flex items-center gap-6 text-xs text-muted-foreground">
               <div className="flex items-center gap-1.5">
-                <div className="flex -space-x-1">
+                <div className="flex gap-1">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="h-3.5 w-3.5 fill-primary text-primary" />
                   ))}
