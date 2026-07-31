@@ -131,6 +131,8 @@ function Index() {
       <WhyUs />
       <GoogleBusiness />
       <LandingSection />
+      <LogoSection />
+
       <FAQ />
       <FinalCTA />
       <Footer />
@@ -153,7 +155,9 @@ function Nav({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => void }
     ["Planos", "#planos"],
     ["Processo", "#processo"],
     ["Projetos", "#projetos"],
+    ["Logótipo", "#logotipo"],
     ["FAQ", "#faq"],
+
   ];
   return (
     <header
@@ -886,7 +890,125 @@ function LandingSection() {
   );
 }
 
+/* ---------------- LOGO SECTION ---------------- */
+function LogoSection() {
+  const marks = [
+    { label: "Aurora Studio", tag: "Arquitetura", glyph: "A", icon: Sparkles },
+    { label: "Nova Café", tag: "Restauração", glyph: "N", icon: Zap },
+    { label: "Vela Boutique", tag: "Moda", glyph: "V", icon: ShoppingBag },
+    { label: "Norte Advogados", tag: "Jurídico", glyph: "NA", icon: ShieldCheck },
+  ];
+  const deliverables = [
+    "Logótipo principal",
+    "Versões horizontal e vertical",
+    "Símbolo / favicon",
+    "Versão monocromática",
+    "Paleta de cores",
+    "Tipografia",
+    "Ficheiros SVG, PNG e PDF",
+    "Manual de utilização",
+  ];
+
+  return (
+    <Section id="logotipo" eyebrow="Logótipo" title="Uma marca que se reconhece à primeira.">
+      <div className="grid gap-6 lg:grid-cols-[1.05fr_1fr] lg:items-start">
+        <div data-reveal className="opacity-0 translate-y-4 transition-all duration-700">
+          <p className="max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+            Criamos identidades visuais desenhadas do zero — sem templates, sem ícones genéricos.
+            Cada logótipo nasce de um estudo do negócio, do público e da concorrência, e é entregue
+            pronto para viver no site, nas redes, na fachada e na papelada.
+          </p>
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            {[
+              { icon: Palette, t: "Conceito exclusivo", d: "3 propostas distintas para escolher." },
+              { icon: Code2, t: "Vetorial e escalável", d: "Nítido do favicon ao outdoor." },
+              { icon: Smartphone, t: "Testado em contexto", d: "Aplicado em mockups reais." },
+              { icon: ShieldCheck, t: "Revisões incluídas", d: "Até ficar exatamente certo." },
+            ].map((b, i) => (
+              <div
+                key={b.t}
+                data-reveal
+                style={{ transitionDelay: `${i * 60}ms` }}
+                className="card-tech group opacity-0 translate-y-4 rounded-xl border border-border bg-card p-4 transition-all duration-500 hover:-translate-y-1 hover:border-primary/40"
+              >
+                <b.icon className="h-5 w-5 text-primary transition-transform duration-300 group-hover:scale-110" />
+                <div className="mt-2.5 text-sm font-semibold">{b.t}</div>
+                <div className="mt-1 text-xs text-muted-foreground">{b.d}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-2">
+            {deliverables.map((d) => (
+              <span
+                key={d}
+                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+              >
+                <Check className="h-3 w-3 text-primary" />
+                {d}
+              </span>
+            ))}
+          </div>
+
+          <a
+            href={WHATSAPP_URL}
+            className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:brightness-110 hover:shadow-[0_0_30px_-5px_var(--electric-glow)]"
+          >
+            Quero o meu logótipo <ArrowRight className="h-4 w-4" />
+          </a>
+        </div>
+
+        <div
+          data-reveal
+          className="scan-beam card-tech relative opacity-0 translate-y-4 rounded-2xl border border-border bg-card p-5 transition-all duration-700 sm:p-6"
+        >
+          <div className="pointer-events-none absolute inset-0 grid-bg opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_10%,transparent_75%)]" />
+          <div className="relative flex items-center justify-between">
+            <div className="text-xs uppercase tracking-wider text-muted-foreground">Marcas criadas</div>
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary/60 px-2.5 py-1 text-[11px] text-muted-foreground">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+              vetorial
+            </div>
+          </div>
+
+          <div className="relative mt-4 grid grid-cols-2 gap-3">
+            {marks.map((m, i) => (
+              <div
+                key={m.label}
+                data-reveal
+                style={{ transitionDelay: `${i * 70}ms` }}
+                className="group relative aspect-square overflow-hidden rounded-xl border border-border bg-secondary/30 p-4 opacity-0 translate-y-4 transition-all duration-500 hover:border-primary/50 hover:bg-secondary/60"
+              >
+                <div className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="flex h-full flex-col items-center justify-center gap-2">
+                  <div className="relative grid h-14 w-14 place-items-center rounded-xl border border-border bg-background transition-all duration-500 group-hover:border-primary/50 group-hover:shadow-[0_0_28px_-6px_var(--electric-glow)]">
+                    <span className="text-gradient-tech text-xl font-black tracking-tight">{m.glyph}</span>
+                    <m.icon className="absolute -bottom-1.5 -right-1.5 h-4 w-4 rounded-md bg-card p-0.5 text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  </div>
+                  <div className="text-center">
+                    <div className="text-xs font-semibold">{m.label}</div>
+                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground">{m.tag}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="relative mt-4 flex items-center justify-between rounded-xl border border-border bg-background/60 px-4 py-3">
+            <div className="text-xs text-muted-foreground">Entrega média</div>
+            <div className="text-sm font-semibold">
+              <CountUp to={5} suffix=" dias" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
 /* ---------------- FAQ ---------------- */
+
 function FAQ() {
   const faqs = [
     ["Quanto tempo demora um website?", "Entre 7 e 21 dias úteis dependendo da complexidade e do plano escolhido."],
