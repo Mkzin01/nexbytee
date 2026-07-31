@@ -12,6 +12,11 @@ import auroraImg from "@/assets/portfolio/aurora.jpg";
 import novaImg from "@/assets/portfolio/nova.jpg";
 import velaImg from "@/assets/portfolio/vela.jpg";
 import norteImg from "@/assets/portfolio/norte.jpg";
+import auroraLogo from "@/assets/logos/aurora-logo.png";
+import novaLogo from "@/assets/logos/nova-logo.png";
+import velaLogo from "@/assets/logos/vela-logo.png";
+import norteLogo from "@/assets/logos/norte-logo.png";
+
 
 
 const WHATSAPP_URL = "https://wa.me/351000000000?text=Ol%C3%A1%20NexByte%2C%20quero%20um%20or%C3%A7amento";
