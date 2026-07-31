@@ -297,11 +297,12 @@ function Services() {
           <div
             key={s.title}
             data-reveal
-            className="group relative opacity-0 translate-y-4 rounded-xl border border-border bg-card p-5 transition-all duration-500 hover:border-primary/40 hover:-translate-y-0.5"
+            className="card-tech group relative opacity-0 translate-y-4 overflow-hidden rounded-xl border border-border bg-card p-5 transition-all duration-500 hover:border-primary/40 hover:-translate-y-1 hover:shadow-[0_18px_50px_-24px_var(--electric-glow)]"
             style={{ transitionDelay: `${(i % 4) * 60}ms` }}
           >
-            <div className="grid h-10 w-10 place-items-center rounded-lg bg-secondary text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-              <s.icon className="h-5 w-5" />
+            <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="relative grid h-10 w-10 place-items-center rounded-lg bg-secondary text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_24px_-4px_var(--electric-glow)]">
+              <s.icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
             </div>
             <h3 className="mt-4 text-base font-semibold">{s.title}</h3>
             <p className="mt-1.5 text-sm text-muted-foreground">{s.desc}</p>
