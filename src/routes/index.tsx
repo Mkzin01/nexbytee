@@ -180,7 +180,7 @@ function Nav({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => void }
 /* ---------------- HERO ---------------- */
 function Hero() {
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-24">
+    <section className="relative overflow-hidden pt-24 pb-14 sm:pt-32 sm:pb-20">
       <div className="grid-bg pointer-events-none absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
       <div
         className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-[900px] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
@@ -754,7 +754,7 @@ function FAQ() {
 /* ---------------- FINAL CTA ---------------- */
 function FinalCTA() {
   return (
-    <section className="relative overflow-hidden py-20 sm:py-28">
+    <section className="relative overflow-hidden py-14 sm:py-20">
       <div
         className="pointer-events-none absolute inset-0 opacity-60"
         style={{
@@ -853,9 +853,9 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="py-20 sm:py-28">
+    <section id={id} className="py-14 sm:py-20">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="mb-10 max-w-2xl sm:mb-14">
+        <div className="mb-8 max-w-2xl sm:mb-10">
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs uppercase tracking-wider text-muted-foreground">
             <span className="h-1 w-1 rounded-full bg-primary" />
             {eyebrow}
