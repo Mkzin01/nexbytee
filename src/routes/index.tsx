@@ -278,9 +278,15 @@ function Hero() {
           </div>
 
           <div data-reveal className="opacity-0 translate-y-4 transition-all duration-700 delay-150">
-            <div className="relative">
+            <div className="relative float-slow">
               <div className="absolute -inset-6 rounded-3xl bg-primary/10 blur-3xl" />
-              <div className="relative overflow-hidden rounded-2xl border border-border bg-card glow-electric">
+              <div className="scan-beam relative overflow-hidden rounded-2xl border border-border bg-card glow-electric">
+                <div className="flex items-center gap-1.5 border-b border-border bg-secondary/40 px-3 py-2">
+                  <span className="h-2 w-2 rounded-full bg-muted-foreground/40" />
+                  <span className="h-2 w-2 rounded-full bg-muted-foreground/40" />
+                  <span className="h-2 w-2 rounded-full bg-primary/70" />
+                  <span className="ml-2 font-mono text-[10px] tracking-wider text-muted-foreground">nexbyte.pt</span>
+                </div>
                 <img
                   src={heroMockup}
                   alt="Mockups de websites desenvolvidos pela NexByte"
@@ -288,8 +294,13 @@ function Hero() {
                   loading="eager"
                 />
               </div>
+              <div className="pointer-events-none absolute -bottom-4 -left-4 hidden items-center gap-2 rounded-xl border border-border bg-card/90 px-3 py-2 backdrop-blur sm:flex">
+                <Code2 className="h-4 w-4 text-primary" />
+                <span className="font-mono text-[11px] text-muted-foreground">performance: 98/100</span>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
