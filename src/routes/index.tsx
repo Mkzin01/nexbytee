@@ -4,7 +4,9 @@ import {
   ArrowRight, Check, Globe, Rocket, MapPin, ShoppingBag, Sparkles, Search,
   Palette, TrendingUp, Menu, X, Phone, Mail, Instagram, Facebook, Linkedin,
   Zap, ShieldCheck, Code2, Smartphone, Plus, Minus, Star,
+  Navigation as NavigationIcon,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 import heroMockup from "@/assets/hero-nexbyte.jpg.asset.json";
 import auroraImg from "@/assets/portfolio/aurora.jpg";
 import novaImg from "@/assets/portfolio/nova.jpg";
@@ -694,7 +696,7 @@ function GoogleBusiness() {
   const perks = [
     { icon: Search, t: "Mais visibilidade local", d: "Topo do mapa nas pesquisas da sua zona." },
     { icon: Phone, t: "Mais chamadas", d: "Botão de contacto direto no perfil." },
-    { icon: Navigation, t: "Mais rotas até si", d: "Clientes a um toque da sua porta." },
+    { icon: NavigationIcon, t: "Mais rotas até si", d: "Clientes a um toque da sua porta." },
     { icon: Star, t: "Mais avaliações", d: "Reputação que gera confiança imediata." },
   ];
 
@@ -779,7 +781,7 @@ function GoogleBusiness() {
               <div className="mt-3 grid grid-cols-3 gap-2 text-center text-xs">
                 {[
                   { l: "Ligar", i: Phone },
-                  { l: "Rota", i: Navigation },
+                  { l: "Rota", i: NavigationIcon },
                   { l: "Website", i: Globe },
                 ].map((a) => (
                   <div
@@ -801,17 +803,15 @@ function GoogleBusiness() {
                   </div>
                 </div>
                 {[
-                  { c: "left-[18%] top-[26%]" },
-                  { c: "left-[74%] top-[34%]" },
-                  { c: "left-[30%] top-[70%]" },
-                  { c: "left-[66%] top-[74%]" },
-                ].map((d, i) => (
+                  "left-[18%] top-[26%]",
+                  "left-[74%] top-[34%]",
+                  "left-[30%] top-[70%]",
+                  "left-[66%] top-[74%]",
+                ].map((pos, i) => (
                   <span
-                    key={d.c}
-                    className="absolute h-2 w-2 animate-pulse rounded-full bg-primary/40"
+                    key={pos}
+                    className={cn("absolute h-2 w-2 animate-pulse rounded-full bg-primary/40", pos)}
                     style={{ animationDelay: `${i * 0.4}s` }}
-                    // position classes applied below
-                    data-pos={d.c}
                   />
                 ))}
               </div>
