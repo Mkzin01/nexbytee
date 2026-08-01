@@ -984,11 +984,11 @@ function LogoSection() {
                 key={m.label}
                 data-reveal
                 style={{ transitionDelay: `${i * 70}ms` }}
-                className="group relative aspect-square overflow-hidden rounded-xl border border-border bg-secondary/30 p-4 opacity-0 translate-y-4 transition-all duration-500 hover:border-primary/50 hover:bg-secondary/60"
+                className="group relative overflow-hidden rounded-xl border border-border bg-secondary/30 p-3 opacity-0 translate-y-4 transition-all duration-500 hover:border-primary/50 hover:bg-secondary/60 sm:p-4"
               >
                 <div className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
-                <div className="flex h-full flex-col items-center justify-center gap-2">
-                  <div className="relative flex h-24 w-full items-center justify-center rounded-xl border border-border bg-background p-2 transition-all duration-500 group-hover:border-primary/60 group-hover:shadow-[0_0_36px_-6px_var(--electric-glow)]">
+                <div className="flex h-full flex-col items-center gap-2">
+                  <div className="relative flex aspect-square w-full min-h-0 flex-1 items-center justify-center rounded-xl border border-border bg-background p-2 transition-all duration-500 group-hover:border-primary/60 group-hover:shadow-[0_0_36px_-6px_var(--electric-glow)]">
                     <img
                       src={m.logo}
                       alt={`Logótipo ${m.label}`}
@@ -999,9 +999,9 @@ function LogoSection() {
                     />
                   </div>
 
-                  <div className="text-center">
-                    <div className="text-xs font-semibold">{m.label}</div>
-                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground">{m.tag}</div>
+                  <div className="w-full shrink-0 pb-0.5 text-center">
+                    <div className="truncate text-xs font-semibold leading-tight">{m.label}</div>
+                    <div className="truncate text-[10px] uppercase leading-tight tracking-wider text-muted-foreground">{m.tag}</div>
                   </div>
                 </div>
               </div>
