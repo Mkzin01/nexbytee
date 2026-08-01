@@ -12,10 +12,10 @@ import auroraImg from "@/assets/portfolio/aurora.jpg";
 import novaImg from "@/assets/portfolio/nova.jpg";
 import velaImg from "@/assets/portfolio/vela.jpg";
 import norteImg from "@/assets/portfolio/norte.jpg";
-import auroraLogo from "@/assets/logos/aurora-logo.png";
-import novaLogo from "@/assets/logos/nova-logo.png";
-import velaLogo from "@/assets/logos/vela-logo.png";
-import norteLogo from "@/assets/logos/norte-logo.png";
+import helixLogo from "@/assets/logos/helix-logo.png";
+import verdeLogo from "@/assets/logos/verde-logo.png";
+import luminaLogo from "@/assets/logos/lumina-logo.png";
+import atlasLogo from "@/assets/logos/atlas-logo.png";
 
 
 
@@ -898,10 +898,10 @@ function LandingSection() {
 /* ---------------- LOGO SECTION ---------------- */
 function LogoSection() {
   const marks = [
-    { label: "Aurora Studio", tag: "Arquitetura", logo: auroraLogo },
-    { label: "Nova Café", tag: "Restauração", logo: novaLogo },
-    { label: "Vela Boutique", tag: "Moda", logo: velaLogo },
-    { label: "Norte Advogados", tag: "Jurídico", logo: norteLogo },
+    { label: "Helix Labs", tag: "Tecnologia", logo: helixLogo },
+    { label: "Verde Bistrô", tag: "Restauração", logo: verdeLogo },
+    { label: "Lumina Joias", tag: "Joalharia", logo: luminaLogo },
+    { label: "Atlas Capital", tag: "Finanças", logo: atlasLogo },
   ];
 
   const deliverables = [
@@ -988,14 +988,14 @@ function LogoSection() {
               >
                 <div className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
                 <div className="flex h-full flex-col items-center justify-center gap-2">
-                  <div className="relative flex h-20 w-full items-center justify-center rounded-xl border border-border bg-background p-2.5 transition-all duration-500 group-hover:border-primary/50 group-hover:shadow-[0_0_28px_-6px_var(--electric-glow)]">
+                  <div className="relative flex h-24 w-full items-center justify-center rounded-xl border border-border bg-background p-2 transition-all duration-500 group-hover:border-primary/60 group-hover:shadow-[0_0_36px_-6px_var(--electric-glow)]">
                     <img
                       src={m.logo}
                       alt={`Logótipo ${m.label}`}
                       loading="lazy"
                       width={1024}
                       height={1024}
-                      className="h-full w-full object-contain opacity-80 invert transition-all duration-500 group-hover:opacity-100"
+                      className="h-full w-full scale-105 object-contain opacity-95 invert brightness-125 contrast-125 transition-all duration-500 group-hover:scale-110 group-hover:opacity-100"
                     />
                   </div>
 
