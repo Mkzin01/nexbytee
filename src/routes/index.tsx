@@ -356,20 +356,26 @@ function ServiceCard({ s, i, className }: { s: typeof services[0]; i: number; cl
     <div
       data-reveal
       className={cn(
-        "card-tech group relative opacity-0 translate-y-4 overflow-hidden rounded-xl border border-border bg-card p-5 transition-all duration-500 hover:border-primary/40 hover:-translate-y-1 hover:shadow-[0_18px_50px_-24px_var(--electric-glow)]",
+        "card-tech group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-gradient-to-b from-card to-card/60 p-5 opacity-0 translate-y-4 transition-all duration-500 hover:border-primary/45 hover:-translate-y-1.5 hover:shadow-[0_22px_60px_-26px_var(--electric-glow)]",
         className,
       )}
       style={{ transitionDelay: `${(i % 4) * 60}ms` }}
     >
-      <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
-      <div className="relative grid h-10 w-10 place-items-center rounded-lg bg-secondary text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_24px_-4px_var(--electric-glow)]">
+      <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/15 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+      <span className="pointer-events-none absolute right-4 top-4 font-mono text-[11px] tracking-widest text-muted-foreground/40 transition-colors duration-300 group-hover:text-primary/70">
+        {String(i + 1).padStart(2, "0")}
+      </span>
+
+      <div className="relative grid h-11 w-11 place-items-center rounded-xl bg-secondary text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_28px_-4px_var(--electric-glow)]">
         <s.icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
       </div>
       <h3 className="mt-4 text-base font-semibold">{s.title}</h3>
-      <p className="mt-1.5 text-sm text-muted-foreground">{s.desc}</p>
+      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+      <span className="mt-4 block h-px w-full bg-gradient-to-r from-primary/60 via-primary/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
     </div>
   );
 }
+
 
 function Services() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -424,35 +430,38 @@ function Services() {
           ))}
         </div>
 
-        <div className="flex items-center justify-center gap-3">
-          <button
-            onClick={prev}
-            aria-label="Anterior"
-            className="grid h-8 w-8 place-items-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-          >
-            <ArrowRight className="h-3.5 w-3.5 rotate-180" />
-          </button>
-          <div className="flex gap-1.5">
-            {services.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => scrollTo(i)}
-                aria-label={`Ir para slide ${i + 1}`}
-                className={cn(
-                  "h-1.5 rounded-full transition-all duration-300",
-                  active === i ? "w-6 bg-primary" : "w-1.5 bg-muted-foreground/40 hover:bg-muted-foreground/60",
-                )}
-              />
-            ))}
+        <div className="flex items-center justify-between gap-3">
+          <span className="font-mono text-xs tracking-widest text-muted-foreground">
+            <span className="text-primary">{String(active + 1).padStart(2, "0")}</span>
+            {" / "}
+            {String(services.length).padStart(2, "0")}
+          </span>
+
+          <div className="mx-2 h-px flex-1 overflow-hidden bg-border">
+            <span
+              className="block h-px bg-primary shadow-[0_0_10px_var(--electric-glow)] transition-all duration-300"
+              style={{ width: `${((active + 1) / services.length) * 100}%` }}
+            />
           </div>
-          <button
-            onClick={next}
-            aria-label="Próximo"
-            className="grid h-8 w-8 place-items-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-          >
-            <ArrowRight className="h-3.5 w-3.5" />
-          </button>
+
+          <div className="flex gap-2">
+            <button
+              onClick={prev}
+              aria-label="Anterior"
+              className="grid h-9 w-9 place-items-center rounded-full border border-border bg-card text-muted-foreground transition-all hover:border-primary hover:text-primary active:scale-95"
+            >
+              <ArrowRight className="h-3.5 w-3.5 rotate-180" />
+            </button>
+            <button
+              onClick={next}
+              aria-label="Próximo"
+              className="grid h-9 w-9 place-items-center rounded-full border border-primary/40 bg-primary/10 text-primary transition-all hover:bg-primary hover:text-primary-foreground active:scale-95"
+            >
+              <ArrowRight className="h-3.5 w-3.5" />
+            </button>
+          </div>
         </div>
+
       </div>
     </Section>
   );
@@ -1249,20 +1258,44 @@ function Section({
   title: string;
   children: React.ReactNode;
 }) {
+  // Destaca a última palavra do título com o gradiente tech.
+  const words = title.trim().split(" ");
+  const head = words.slice(0, -1).join(" ");
+  const tail = words[words.length - 1];
+
   return (
-    <section id={id} className="py-14 sm:py-20">
+    <section id={id} className="relative py-14 sm:py-20">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="mb-8 max-w-2xl sm:mb-10">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs uppercase tracking-wider text-muted-foreground">
-            <span className="h-1 w-1 rounded-full bg-primary" />
+        <div className="mb-9 max-w-3xl sm:mb-12">
+          <div
+            data-reveal
+            className="group relative inline-flex translate-y-3 items-center gap-2 overflow-hidden rounded-full border border-primary/30 bg-primary/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary opacity-0 shadow-[0_0_24px_-10px_var(--electric-glow)] transition-all duration-500"
+          >
+            <span className="relative grid h-1.5 w-1.5 place-items-center rounded-full bg-primary pulse-ring" />
             {eyebrow}
           </div>
-          <h2 data-reveal className="opacity-0 translate-y-4 transition-all duration-700 mt-4 text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl">
-            {title}
+
+          <h2
+            data-reveal
+            style={{ transitionDelay: "80ms" }}
+            className="mt-4 translate-y-4 text-[2rem] font-black leading-[1.05] tracking-tight opacity-0 transition-all duration-700 sm:text-5xl lg:text-[3.4rem]"
+          >
+            {head && <span>{head} </span>}
+            <span className="text-gradient-tech">{tail}</span>
           </h2>
+
+          <div
+            data-reveal
+            style={{ transitionDelay: "160ms" }}
+            className="mt-5 flex translate-y-3 items-center gap-2 opacity-0 transition-all duration-700"
+          >
+            <span className="h-px w-12 bg-gradient-to-r from-primary to-transparent" />
+            <span className="h-px w-24 bg-border" />
+          </div>
         </div>
         {children}
       </div>
     </section>
   );
 }
+
