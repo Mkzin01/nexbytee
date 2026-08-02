@@ -430,35 +430,38 @@ function Services() {
           ))}
         </div>
 
-        <div className="flex items-center justify-center gap-3">
-          <button
-            onClick={prev}
-            aria-label="Anterior"
-            className="grid h-8 w-8 place-items-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-          >
-            <ArrowRight className="h-3.5 w-3.5 rotate-180" />
-          </button>
-          <div className="flex gap-1.5">
-            {services.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => scrollTo(i)}
-                aria-label={`Ir para slide ${i + 1}`}
-                className={cn(
-                  "h-1.5 rounded-full transition-all duration-300",
-                  active === i ? "w-6 bg-primary" : "w-1.5 bg-muted-foreground/40 hover:bg-muted-foreground/60",
-                )}
-              />
-            ))}
+        <div className="flex items-center justify-between gap-3">
+          <span className="font-mono text-xs tracking-widest text-muted-foreground">
+            <span className="text-primary">{String(active + 1).padStart(2, "0")}</span>
+            {" / "}
+            {String(services.length).padStart(2, "0")}
+          </span>
+
+          <div className="mx-2 h-px flex-1 overflow-hidden bg-border">
+            <span
+              className="block h-px bg-primary shadow-[0_0_10px_var(--electric-glow)] transition-all duration-300"
+              style={{ width: `${((active + 1) / services.length) * 100}%` }}
+            />
           </div>
-          <button
-            onClick={next}
-            aria-label="Próximo"
-            className="grid h-8 w-8 place-items-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-          >
-            <ArrowRight className="h-3.5 w-3.5" />
-          </button>
+
+          <div className="flex gap-2">
+            <button
+              onClick={prev}
+              aria-label="Anterior"
+              className="grid h-9 w-9 place-items-center rounded-full border border-border bg-card text-muted-foreground transition-all hover:border-primary hover:text-primary active:scale-95"
+            >
+              <ArrowRight className="h-3.5 w-3.5 rotate-180" />
+            </button>
+            <button
+              onClick={next}
+              aria-label="Próximo"
+              className="grid h-9 w-9 place-items-center rounded-full border border-primary/40 bg-primary/10 text-primary transition-all hover:bg-primary hover:text-primary-foreground active:scale-95"
+            >
+              <ArrowRight className="h-3.5 w-3.5" />
+            </button>
+          </div>
         </div>
+
       </div>
     </Section>
   );
