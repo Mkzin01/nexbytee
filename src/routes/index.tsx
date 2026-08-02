@@ -1249,20 +1249,44 @@ function Section({
   title: string;
   children: React.ReactNode;
 }) {
+  // Destaca a última palavra do título com o gradiente tech.
+  const words = title.trim().split(" ");
+  const head = words.slice(0, -1).join(" ");
+  const tail = words[words.length - 1];
+
   return (
-    <section id={id} className="py-14 sm:py-20">
+    <section id={id} className="relative py-14 sm:py-20">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="mb-8 max-w-2xl sm:mb-10">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-3 py-1 text-xs uppercase tracking-wider text-muted-foreground">
-            <span className="h-1 w-1 rounded-full bg-primary" />
+        <div className="mb-9 max-w-3xl sm:mb-12">
+          <div
+            data-reveal
+            className="group relative inline-flex translate-y-3 items-center gap-2 overflow-hidden rounded-full border border-primary/30 bg-primary/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary opacity-0 shadow-[0_0_24px_-10px_var(--electric-glow)] transition-all duration-500"
+          >
+            <span className="relative grid h-1.5 w-1.5 place-items-center rounded-full bg-primary pulse-ring" />
             {eyebrow}
           </div>
-          <h2 data-reveal className="opacity-0 translate-y-4 transition-all duration-700 mt-4 text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl">
-            {title}
+
+          <h2
+            data-reveal
+            style={{ transitionDelay: "80ms" }}
+            className="mt-4 translate-y-4 text-[2rem] font-black leading-[1.05] tracking-tight opacity-0 transition-all duration-700 sm:text-5xl lg:text-[3.4rem]"
+          >
+            {head && <span>{head} </span>}
+            <span className="text-gradient-tech">{tail}</span>
           </h2>
+
+          <div
+            data-reveal
+            style={{ transitionDelay: "160ms" }}
+            className="mt-5 flex translate-y-3 items-center gap-2 opacity-0 transition-all duration-700"
+          >
+            <span className="h-px w-12 bg-gradient-to-r from-primary to-transparent" />
+            <span className="h-px w-24 bg-border" />
+          </div>
         </div>
         {children}
       </div>
     </section>
   );
 }
+
