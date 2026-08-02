@@ -340,35 +340,119 @@ function Stats() {
 }
 
 /* ---------------- SERVICES ---------------- */
+const services = [
+  { icon: Globe, title: "Website Institucional", desc: "Presença digital sólida, moderna e alinhada com a sua marca." },
+  { icon: Rocket, title: "Landing Pages", desc: "Páginas focadas em conversão para as suas campanhas." },
+  { icon: MapPin, title: "Google Business", desc: "Perfis otimizados para atrair mais chamadas e clientes locais." },
+  { icon: ShoppingBag, title: "Lojas Online", desc: "E-commerce rápido, seguro e pronto para vender." },
+  { icon: Sparkles, title: "Logótipos", desc: "Identidade única, memorável e profissional." },
+  { icon: Search, title: "SEO", desc: "Aparecer no Google para as pesquisas certas." },
+  { icon: Palette, title: "Identidade Visual", desc: "Branding coerente em todos os pontos de contacto." },
+  { icon: TrendingUp, title: "Otimização de Conversão", desc: "Mais leads e vendas a partir do mesmo tráfego." },
+];
+
+function ServiceCard({ s, i, className }: { s: typeof services[0]; i: number; className?: string }) {
+  return (
+    <div
+      data-reveal
+      className={cn(
+        "card-tech group relative opacity-0 translate-y-4 overflow-hidden rounded-xl border border-border bg-card p-5 transition-all duration-500 hover:border-primary/40 hover:-translate-y-1 hover:shadow-[0_18px_50px_-24px_var(--electric-glow)]",
+        className,
+      )}
+      style={{ transitionDelay: `${(i % 4) * 60}ms` }}
+    >
+      <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="relative grid h-10 w-10 place-items-center rounded-lg bg-secondary text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_24px_-4px_var(--electric-glow)]">
+        <s.icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+      </div>
+      <h3 className="mt-4 text-base font-semibold">{s.title}</h3>
+      <p className="mt-1.5 text-sm text-muted-foreground">{s.desc}</p>
+    </div>
+  );
+}
+
 function Services() {
-  const services = [
-    { icon: Globe, title: "Website Institucional", desc: "Presença digital sólida, moderna e alinhada com a sua marca." },
-    { icon: Rocket, title: "Landing Pages", desc: "Páginas focadas em conversão para as suas campanhas." },
-    { icon: MapPin, title: "Google Business", desc: "Perfis otimizados para atrair mais chamadas e clientes locais." },
-    { icon: ShoppingBag, title: "Lojas Online", desc: "E-commerce rápido, seguro e pronto para vender." },
-    { icon: Sparkles, title: "Logótipos", desc: "Identidade única, memorável e profissional." },
-    { icon: Search, title: "SEO", desc: "Aparecer no Google para as pesquisas certas." },
-    { icon: Palette, title: "Identidade Visual", desc: "Branding coerente em todos os pontos de contacto." },
-    { icon: TrendingUp, title: "Otimização de Conversão", desc: "Mais leads e vendas a partir do mesmo tráfego." },
-  ];
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+
+  const updateActive = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const slide = el.scrollLeft / (el.scrollWidth / services.length);
+    setActive(Math.min(services.length - 1, Math.max(0, Math.round(slide))));
+  };
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.addEventListener("scroll", updateActive, { passive: true });
+    return () => el.removeEventListener("scroll", updateActive);
+  }, []);
+
+  const scrollTo = (index: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const cardWidth = el.scrollWidth / services.length;
+    el.scrollTo({ left: cardWidth * index, behavior: "smooth" });
+  };
+
+  const next = () => scrollTo((active + 1) % services.length);
+  const prev = () => scrollTo((active - 1 + services.length) % services.length);
+
   return (
     <Section id="servicos" eyebrow="Serviços" title="Tudo o que a sua empresa precisa online.">
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {/* Desktop: grid horizontal */}
+      <div className="hidden gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-4">
         {services.map((s, i) => (
-          <div
-            key={s.title}
-            data-reveal
-            className="card-tech group relative opacity-0 translate-y-4 overflow-hidden rounded-xl border border-border bg-card p-5 transition-all duration-500 hover:border-primary/40 hover:-translate-y-1 hover:shadow-[0_18px_50px_-24px_var(--electric-glow)]"
-            style={{ transitionDelay: `${(i % 4) * 60}ms` }}
-          >
-            <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="relative grid h-10 w-10 place-items-center rounded-lg bg-secondary text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_24px_-4px_var(--electric-glow)]">
-              <s.icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
-            </div>
-            <h3 className="mt-4 text-base font-semibold">{s.title}</h3>
-            <p className="mt-1.5 text-sm text-muted-foreground">{s.desc}</p>
-          </div>
+          <ServiceCard key={s.title} s={s} i={i} />
         ))}
+      </div>
+
+      {/* Mobile: carrossel horizontal com snap */}
+      <div className="sm:hidden">
+        <div
+          ref={scrollRef}
+          className="scrollbar-hide -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-6"
+        >
+          {services.map((s, i) => (
+            <div
+              key={s.title}
+              className="w-[82vw] shrink-0 snap-center"
+            >
+              <ServiceCard s={s} i={i} className="h-full" />
+            </div>
+          ))}
+        </div>
+
+        <div className="flex items-center justify-center gap-3">
+          <button
+            onClick={prev}
+            aria-label="Anterior"
+            className="grid h-8 w-8 place-items-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+          >
+            <ArrowRight className="h-3.5 w-3.5 rotate-180" />
+          </button>
+          <div className="flex gap-1.5">
+            {services.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => scrollTo(i)}
+                aria-label={`Ir para slide ${i + 1}`}
+                className={cn(
+                  "h-1.5 rounded-full transition-all duration-300",
+                  active === i ? "w-6 bg-primary" : "w-1.5 bg-muted-foreground/40 hover:bg-muted-foreground/60",
+                )}
+              />
+            ))}
+          </div>
+          <button
+            onClick={next}
+            aria-label="Próximo"
+            className="grid h-8 w-8 place-items-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+          >
+            <ArrowRight className="h-3.5 w-3.5" />
+          </button>
+        </div>
       </div>
     </Section>
   );
