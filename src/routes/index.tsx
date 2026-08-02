@@ -356,20 +356,26 @@ function ServiceCard({ s, i, className }: { s: typeof services[0]; i: number; cl
     <div
       data-reveal
       className={cn(
-        "card-tech group relative opacity-0 translate-y-4 overflow-hidden rounded-xl border border-border bg-card p-5 transition-all duration-500 hover:border-primary/40 hover:-translate-y-1 hover:shadow-[0_18px_50px_-24px_var(--electric-glow)]",
+        "card-tech group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-gradient-to-b from-card to-card/60 p-5 opacity-0 translate-y-4 transition-all duration-500 hover:border-primary/45 hover:-translate-y-1.5 hover:shadow-[0_22px_60px_-26px_var(--electric-glow)]",
         className,
       )}
       style={{ transitionDelay: `${(i % 4) * 60}ms` }}
     >
-      <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
-      <div className="relative grid h-10 w-10 place-items-center rounded-lg bg-secondary text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_24px_-4px_var(--electric-glow)]">
+      <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/15 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+      <span className="pointer-events-none absolute right-4 top-4 font-mono text-[11px] tracking-widest text-muted-foreground/40 transition-colors duration-300 group-hover:text-primary/70">
+        {String(i + 1).padStart(2, "0")}
+      </span>
+
+      <div className="relative grid h-11 w-11 place-items-center rounded-xl bg-secondary text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_28px_-4px_var(--electric-glow)]">
         <s.icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
       </div>
       <h3 className="mt-4 text-base font-semibold">{s.title}</h3>
-      <p className="mt-1.5 text-sm text-muted-foreground">{s.desc}</p>
+      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+      <span className="mt-4 block h-px w-full bg-gradient-to-r from-primary/60 via-primary/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
     </div>
   );
 }
+
 
 function Services() {
   const scrollRef = useRef<HTMLDivElement>(null);
