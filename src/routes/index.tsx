@@ -1289,19 +1289,21 @@ function Section({
   return (
     <section id={id} className="relative py-14 sm:py-20">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="mb-9 max-w-3xl sm:mb-12">
+        <div className="mb-10 max-w-3xl sm:mb-14">
           <div
             data-reveal
-            className="group relative inline-flex translate-y-3 items-center gap-2 overflow-hidden rounded-full border border-primary/30 bg-primary/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary opacity-0 shadow-[0_0_24px_-10px_var(--electric-glow)] transition-all duration-500"
+            className="group relative inline-flex translate-y-3 items-center gap-2 overflow-hidden rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-primary opacity- "
           >
-            <span className="relative grid h-1.5 w-1.5 place-items-center rounded-full bg-primary pulse-ring" />
+            {/* shimmer */}
+            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-primary/15 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
+            <span className="relative grid h-1.5 w-1.5 place-items-center rounded-full bg-primary shadow-[0_0_10px_var(--electric)] pulse-ring" />
             {eyebrow}
           </div>
 
           <h2
             data-reveal
             style={{ transitionDelay: "80ms" }}
-            className="mt-4 translate-y-4 text-[2rem] font-black leading-[1.05] tracking-tight opacity-0 transition-all duration-700 sm:text-5xl lg:text-[3.4rem]"
+            className="mt-5 translate-y-4 text-[2.1rem] font-black leading-[1.03] tracking-tight opacity-0 transition-all duration-700 sm:text-[3rem] lg:text-[3.8rem]"
           >
             {head && <span>{head} </span>}
             <span className="text-gradient-tech">{tail}</span>
@@ -1310,10 +1312,11 @@ function Section({
           <div
             data-reveal
             style={{ transitionDelay: "160ms" }}
-            className="mt-5 flex translate-y-3 items-center gap-2 opacity-0 transition-all duration-700"
+            className="mt-6 flex translate-y-3 items-center gap-3 opacity-0 transition-all duration-700"
           >
-            <span className="h-px w-12 bg-gradient-to-r from-primary to-transparent" />
-            <span className="h-px w-24 bg-border" />
+            <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_var(--electric)]" />
+            <span className="h-px w-16 bg-gradient-to-r from-primary to-transparent" />
+            <span className="h-px w-28 bg-border" />
           </div>
         </div>
         {children}
