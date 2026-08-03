@@ -341,14 +341,14 @@ function Stats() {
 
 /* ---------------- SERVICES ---------------- */
 const services = [
-  { icon: Globe, title: "Website Institucional", desc: "Presença digital sólida, moderna e alinhada com a sua marca." },
-  { icon: Rocket, title: "Landing Pages", desc: "Páginas focadas em conversão para as suas campanhas." },
-  { icon: MapPin, title: "Google Business", desc: "Perfis otimizados para atrair mais chamadas e clientes locais." },
-  { icon: ShoppingBag, title: "Lojas Online", desc: "E-commerce rápido, seguro e pronto para vender." },
-  { icon: Sparkles, title: "Logótipos", desc: "Identidade única, memorável e profissional." },
-  { icon: Search, title: "SEO", desc: "Aparecer no Google para as pesquisas certas." },
-  { icon: Palette, title: "Identidade Visual", desc: "Branding coerente em todos os pontos de contacto." },
-  { icon: TrendingUp, title: "Otimização de Conversão", desc: "Mais leads e vendas a partir do mesmo tráfego." },
+  { icon: Globe, title: "Website Institucional", desc: "Presença digital sólida, moderna e alinhada com a sua marca.", tags: ["React", "SEO", "CMS"] },
+  { icon: Rocket, title: "Landing Pages", desc: "Páginas focadas em conversão para as suas campanhas.", tags: ["A/B Tests", "Analytics", "Copy"] },
+  { icon: MapPin, title: "Google Business", desc: "Perfis otimizados para atrair mais chamadas e clientes locais.", tags: ["Local SEO", "Reviews", "Maps"] },
+  { icon: ShoppingBag, title: "Lojas Online", desc: "E-commerce rápido, seguro e pronto para vender.", tags: ["Shopify", "Stripe", "ERP"] },
+  { icon: Sparkles, title: "Logótipos", desc: "Identidade única, memorável e profissional.", tags: ["Vector", "Brand", "Manual"] },
+  { icon: Search, title: "SEO", desc: "Aparecer no Google para as pesquisas certas.", tags: ["On-page", "Core Web", "Content"] },
+  { icon: Palette, title: "Identidade Visual", desc: "Branding coerente em todos os pontos de contacto.", tags: ["Colors", "Type", "Mockups"] },
+  { icon: TrendingUp, title: "Otimização de Conversão", desc: "Mais leads e vendas a partir do mesmo tráfego.", tags: ["Heatmaps", "Funnels", "KPIs"] },
 ];
 
 function ServiceCard({ s, i, className }: { s: typeof services[0]; i: number; className?: string }) {
@@ -356,22 +356,45 @@ function ServiceCard({ s, i, className }: { s: typeof services[0]; i: number; cl
     <div
       data-reveal
       className={cn(
-        "card-tech group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-gradient-to-b from-card to-card/60 p-5 opacity-0 translate-y-4 transition-all duration-500 hover:border-primary/45 hover:-translate-y-1.5 hover:shadow-[0_22px_60px_-26px_var(--electric-glow)]",
+        "card-tech group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-gradient-to-b from-card to-card/60 p-6 opacity-0 translate-y-4 transition-all duration-500 hover:border-primary/45 hover:-translate-y-1.5 hover:shadow-[0_22px_60px_-26px_var(--electric-glow)]",
         className,
       )}
       style={{ transitionDelay: `${(i % 4) * 60}ms` }}
     >
-      <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/15 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+      {/* ambient glow */}
+      <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/15 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+      {/* index badge */}
       <span className="pointer-events-none absolute right-4 top-4 font-mono text-[11px] tracking-widest text-muted-foreground/40 transition-colors duration-300 group-hover:text-primary/70">
         {String(i + 1).padStart(2, "0")}
       </span>
 
-      <div className="relative grid h-11 w-11 place-items-center rounded-xl bg-secondary text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_28px_-4px_var(--electric-glow)]">
-        <s.icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
+      <div className="relative grid h-12 w-12 place-items-center rounded-xl bg-secondary text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_32px_-4px_var(--electric-glow)]">
+        <s.icon className="h-5.5 w-5.5 transition-transform duration-300 group-hover:scale-110" />
       </div>
-      <h3 className="mt-4 text-base font-semibold">{s.title}</h3>
-      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
-      <span className="mt-4 block h-px w-full bg-gradient-to-r from-primary/60 via-primary/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <h3 className="mt-5 text-lg font-semibold">{s.title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+
+      <div className="mt-4 flex flex-wrap gap-1.5">
+        {s.tags.map((t) => (
+          <span
+            key={t}
+            className="rounded-md border border-border/60 bg-secondary/40 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-muted-foreground transition-colors duration-300 group-hover:border-primary/30 group-hover:text-foreground"
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+
+      <span className="mt-5 block h-px w-full bg-gradient-to-r from-primary/60 via-primary/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+      <div className="mt-auto pt-4">
+        <a
+          href={WHATSAPP_URL}
+          className="inline-flex items-center gap-1 text-xs font-semibold text-primary opacity-0 transition-all duration-500 group-hover:opacity-100"
+        >
+          Saber mais <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
+        </a>
+      </div>
     </div>
   );
 }
@@ -408,7 +431,7 @@ function Services() {
   return (
     <Section id="servicos" eyebrow="Serviços" title="Tudo o que a sua empresa precisa online.">
       {/* Desktop: grid horizontal */}
-      <div className="hidden gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-4">
+      <div className="hidden gap-5 sm:grid sm:grid-cols-2 lg:grid-cols-4">
         {services.map((s, i) => (
           <ServiceCard key={s.title} s={s} i={i} />
         ))}
@@ -418,28 +441,28 @@ function Services() {
       <div className="sm:hidden">
         <div
           ref={scrollRef}
-          className="scrollbar-hide -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-6"
+          className="scrollbar-hide -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-8"
         >
           {services.map((s, i) => (
             <div
               key={s.title}
-              className="w-[82vw] shrink-0 snap-center"
+              className="w-[78vw] shrink-0 snap-center"
             >
               <ServiceCard s={s} i={i} className="h-full" />
             </div>
           ))}
         </div>
 
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center justify-between gap-4">
           <span className="font-mono text-xs tracking-widest text-muted-foreground">
             <span className="text-primary">{String(active + 1).padStart(2, "0")}</span>
             {" / "}
             {String(services.length).padStart(2, "0")}
           </span>
 
-          <div className="mx-2 h-px flex-1 overflow-hidden bg-border">
+          <div className="mx-2 h-1.5 flex-1 overflow-hidden rounded-full bg-border">
             <span
-              className="block h-px bg-primary shadow-[0_0_10px_var(--electric-glow)] transition-all duration-300"
+              className="block h-full rounded-full bg-gradient-to-r from-primary to-[oklch(0.85_0.13_220)] shadow-[0_0_10px_var(--electric-glow)] transition-all duration-300"
               style={{ width: `${((active + 1) / services.length) * 100}%` }}
             />
           </div>
@@ -448,16 +471,16 @@ function Services() {
             <button
               onClick={prev}
               aria-label="Anterior"
-              className="grid h-9 w-9 place-items-center rounded-full border border-border bg-card text-muted-foreground transition-all hover:border-primary hover:text-primary active:scale-95"
+              className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card text-muted-foreground transition-all hover:border-primary hover:text-primary active:scale-95"
             >
-              <ArrowRight className="h-3.5 w-3.5 rotate-180" />
+              <ArrowRight className="h-4 w-4 rotate-180" />
             </button>
             <button
               onClick={next}
               aria-label="Próximo"
-              className="grid h-9 w-9 place-items-center rounded-full border border-primary/40 bg-primary/10 text-primary transition-all hover:bg-primary hover:text-primary-foreground active:scale-95"
+              className="grid h-10 w-10 place-items-center rounded-full border border-primary/40 bg-primary/10 text-primary transition-all hover:bg-primary hover:text-primary-foreground active:scale-95"
             >
-              <ArrowRight className="h-3.5 w-3.5" />
+              <ArrowRight className="h-4 w-4" />
             </button>
           </div>
         </div>
@@ -1266,19 +1289,21 @@ function Section({
   return (
     <section id={id} className="relative py-14 sm:py-20">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="mb-9 max-w-3xl sm:mb-12">
+        <div className="mb-10 max-w-3xl sm:mb-14">
           <div
             data-reveal
-            className="group relative inline-flex translate-y-3 items-center gap-2 overflow-hidden rounded-full border border-primary/30 bg-primary/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary opacity-0 shadow-[0_0_24px_-10px_var(--electric-glow)] transition-all duration-500"
+            className="group relative inline-flex translate-y-3 items-center gap-2 overflow-hidden rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-primary opacity-0 shadow-[0_0_24px_-10px_var(--electric-glow)] transition-all duration-500"
           >
-            <span className="relative grid h-1.5 w-1.5 place-items-center rounded-full bg-primary pulse-ring" />
+            {/* shimmer */}
+            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-primary/15 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
+            <span className="relative grid h-1.5 w-1.5 place-items-center rounded-full bg-primary shadow-[0_0_10px_var(--electric)] pulse-ring" />
             {eyebrow}
           </div>
 
           <h2
             data-reveal
             style={{ transitionDelay: "80ms" }}
-            className="mt-4 translate-y-4 text-[2rem] font-black leading-[1.05] tracking-tight opacity-0 transition-all duration-700 sm:text-5xl lg:text-[3.4rem]"
+            className="mt-5 translate-y-4 text-[2.1rem] font-black leading-[1.03] tracking-tight opacity-0 transition-all duration-700 sm:text-[3rem] lg:text-[3.8rem]"
           >
             {head && <span>{head} </span>}
             <span className="text-gradient-tech">{tail}</span>
@@ -1287,10 +1312,11 @@ function Section({
           <div
             data-reveal
             style={{ transitionDelay: "160ms" }}
-            className="mt-5 flex translate-y-3 items-center gap-2 opacity-0 transition-all duration-700"
+            className="mt-6 flex translate-y-3 items-center gap-3 opacity-0 transition-all duration-700"
           >
-            <span className="h-px w-12 bg-gradient-to-r from-primary to-transparent" />
-            <span className="h-px w-24 bg-border" />
+            <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_var(--electric)]" />
+            <span className="h-px w-16 bg-gradient-to-r from-primary to-transparent" />
+            <span className="h-px w-28 bg-border" />
           </div>
         </div>
         {children}
