@@ -1292,7 +1292,7 @@ function Section({
         <div className="mb-10 max-w-3xl sm:mb-14">
           <div
             data-reveal
-            className="group relative inline-flex translate-y-3 items-center gap-2 overflow-hidden rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-primary opacity- "
+            className="group relative inline-flex translate-y-3 items-center gap-2 overflow-hidden rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-primary opacity-0 shadow-[0_0_24px_-10px_var(--electric-glow)] transition-all duration-500"
           >
             {/* shimmer */}
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-primary/15 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
