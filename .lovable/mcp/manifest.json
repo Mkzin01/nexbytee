@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.1",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "next-prompt-guide",
+      "version": "0.1.0",
+      "title": "Next Prompt Guide"
+    },
+    "tools": [
+      {
+        "name": "list_services",
+        "title": "Listar serviços",
+        "description": "Lista os serviços oferecidos pela NexByte, com descrição e tecnologias associadas.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Filtro opcional por texto no título, descrição ou tags do serviço."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_plans",
+        "title": "Listar planos",
+        "description": "Lista os planos da NexByte (Landing Page, Website Profissional, Solução Completa) e o que cada um inclui.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_portfolio",
+        "title": "Listar portefólio",
+        "description": "Lista os casos de estudo do portefólio público da NexByte, com setor, resultados e stack usada.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Nome (ou parte do nome) de um projeto específico, por exemplo 'Aurora'."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "search_faq",
+        "title": "Pesquisar FAQ",
+        "description": "Pesquisa nas perguntas frequentes públicas da NexByte (prazos, domínio, alojamento, SEO, manutenção).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Termo a pesquisar nas perguntas e respostas."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_contact_info",
+        "title": "Obter contacto e resumo",
+        "description": "Devolve o resumo público da NexByte: o que faz, como contactar (WhatsApp, site) e os planos disponíveis.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
