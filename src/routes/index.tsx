@@ -369,9 +369,12 @@ function ServiceCard({ s, i, className }: { s: typeof services[0]; i: number; cl
         {String(i + 1).padStart(2, "0")}
       </span>
 
-      <div className="relative grid h-12 w-12 place-items-center rounded-xl bg-secondary text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_32px_-4px_var(--electric-glow)]">
-        <s.icon className="h-5.5 w-5.5 transition-transform duration-300 group-hover:scale-110" />
+      <div className="scene-3d">
+        <div className="icon-3d group-hover:icon-3d-hover relative grid h-12 w-12 place-items-center rounded-xl bg-secondary text-primary group-hover:bg-primary group-hover:text-primary-foreground">
+          <s.icon className="h-5.5 w-5.5 drop-shadow-[0_2px_3px_rgba(0,0,0,0.45)]" />
+        </div>
       </div>
+
       <h3 className="mt-5 text-lg font-semibold">{s.title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
 
