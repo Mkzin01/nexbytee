@@ -171,12 +171,13 @@ function Nav({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => void }
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
-        <a href="#" className="flex items-center gap-2 font-bold tracking-tight">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary text-primary-foreground">
-            <Zap className="h-4 w-4" />
+        <a href="#" className="scene-3d flex items-center gap-2.5 font-bold tracking-tight">
+          <span className="logo-3d grid h-9 w-9 place-items-center rounded-[0.7rem] text-primary-foreground">
+            <Zap className="h-4.5 w-4.5 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]" />
           </span>
-          <span className="text-lg">NexByte</span>
+          <span className="text-3d text-lg">NexByte</span>
         </a>
+
         <nav className="hidden items-center gap-8 md:flex">
           {links.map(([l, h]) => (
             <a key={h} href={h} className="text-sm text-muted-foreground transition-colors hover:text-foreground">
@@ -368,9 +369,12 @@ function ServiceCard({ s, i, className }: { s: typeof services[0]; i: number; cl
         {String(i + 1).padStart(2, "0")}
       </span>
 
-      <div className="relative grid h-12 w-12 place-items-center rounded-xl bg-secondary text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_32px_-4px_var(--electric-glow)]">
-        <s.icon className="h-5.5 w-5.5 transition-transform duration-300 group-hover:scale-110" />
+      <div className="scene-3d">
+        <div className="icon-3d group-hover:icon-3d-hover relative grid h-12 w-12 place-items-center rounded-xl bg-secondary text-primary group-hover:bg-primary group-hover:text-primary-foreground">
+          <s.icon className="h-5.5 w-5.5 drop-shadow-[0_2px_3px_rgba(0,0,0,0.45)]" />
+        </div>
       </div>
+
       <h3 className="mt-5 text-lg font-semibold">{s.title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
 
@@ -804,9 +808,12 @@ function WhyUs() {
             key={it.t}
             data-reveal
             style={{ transitionDelay: `${(i % 4) * 60}ms` }}
-            className="card-tech group opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-5 transition-transform hover:-translate-y-1"
+            className="card-tech tilt-3d group opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-5"
           >
-            <it.icon className="h-5 w-5 text-primary" />
+            <span className="icon-3d group-hover:icon-3d-hover mb-3 grid h-10 w-10 place-items-center rounded-lg bg-secondary text-primary">
+              <it.icon className="h-5 w-5 drop-shadow-[0_2px_3px_rgba(0,0,0,0.45)]" />
+            </span>
+
             <div className="mt-3 font-semibold">{it.t}</div>
             <div className="mt-1 text-sm text-muted-foreground">{it.d}</div>
           </div>
@@ -849,10 +856,11 @@ function GoogleBusiness() {
               {perks.map((p) => (
                 <li
                   key={p.t}
-                  className="group flex gap-3 rounded-xl border border-border/60 bg-background/40 p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-background"
+                  className="scene-3d group flex gap-3 rounded-xl border border-border/60 bg-background/40 p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-background"
                 >
-                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary transition-transform duration-300 group-hover:scale-110">
-                    <p.icon className="h-4 w-4" />
+                  <span className="icon-3d group-hover:icon-3d-hover grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary">
+                    <p.icon className="h-4 w-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.45)]" />
+
                   </span>
                   <span>
                     <span className="block text-sm font-semibold">{p.t}</span>
@@ -1052,9 +1060,12 @@ function LogoSection() {
                 key={b.t}
                 data-reveal
                 style={{ transitionDelay: `${i * 60}ms` }}
-                className="card-tech group opacity-0 translate-y-4 rounded-xl border border-border bg-card p-4 transition-all duration-500 hover:-translate-y-1 hover:border-primary/40"
+                className="card-tech tilt-3d group opacity-0 translate-y-4 rounded-xl border border-border bg-card p-4 transition-all duration-500 hover:border-primary/40"
               >
-                <b.icon className="h-5 w-5 text-primary transition-transform duration-300 group-hover:scale-110" />
+                <span className="icon-3d group-hover:icon-3d-hover grid h-10 w-10 place-items-center rounded-lg bg-secondary text-primary">
+                  <b.icon className="h-5 w-5 drop-shadow-[0_2px_3px_rgba(0,0,0,0.45)]" />
+                </span>
+
                 <div className="mt-2.5 text-sm font-semibold">{b.t}</div>
                 <div className="mt-1 text-xs text-muted-foreground">{b.d}</div>
               </div>
@@ -1220,12 +1231,13 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8">
         <div className="grid gap-10 md:grid-cols-4">
           <div>
-            <div className="flex items-center gap-2 font-bold">
-              <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary text-primary-foreground">
-                <Zap className="h-4 w-4" />
+            <div className="scene-3d flex items-center gap-2.5 font-bold">
+              <span className="logo-3d grid h-9 w-9 place-items-center rounded-[0.7rem] text-primary-foreground">
+                <Zap className="h-4.5 w-4.5 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]" />
               </span>
-              NexByte
+              <span className="text-3d">NexByte</span>
             </div>
+
             <p className="mt-4 text-sm text-muted-foreground">
               Agência web em Portugal. Websites, landing pages e presença digital para empresas que querem crescer.
             </p>
