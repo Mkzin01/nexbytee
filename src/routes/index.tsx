@@ -171,12 +171,13 @@ function Nav({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => void }
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
-        <a href="#" className="flex items-center gap-2 font-bold tracking-tight">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary text-primary-foreground">
-            <Zap className="h-4 w-4" />
+        <a href="#" className="scene-3d flex items-center gap-2.5 font-bold tracking-tight">
+          <span className="logo-3d grid h-9 w-9 place-items-center rounded-[0.7rem] text-primary-foreground">
+            <Zap className="h-4.5 w-4.5 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]" />
           </span>
-          <span className="text-lg">NexByte</span>
+          <span className="text-3d text-lg">NexByte</span>
         </a>
+
         <nav className="hidden items-center gap-8 md:flex">
           {links.map(([l, h]) => (
             <a key={h} href={h} className="text-sm text-muted-foreground transition-colors hover:text-foreground">
