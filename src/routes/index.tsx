@@ -1231,12 +1231,13 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8">
         <div className="grid gap-10 md:grid-cols-4">
           <div>
-            <div className="flex items-center gap-2 font-bold">
-              <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary text-primary-foreground">
-                <Zap className="h-4 w-4" />
+            <div className="scene-3d flex items-center gap-2.5 font-bold">
+              <span className="logo-3d grid h-9 w-9 place-items-center rounded-[0.7rem] text-primary-foreground">
+                <Zap className="h-4.5 w-4.5 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]" />
               </span>
-              NexByte
+              <span className="text-3d">NexByte</span>
             </div>
+
             <p className="mt-4 text-sm text-muted-foreground">
               Agência web em Portugal. Websites, landing pages e presença digital para empresas que querem crescer.
             </p>
