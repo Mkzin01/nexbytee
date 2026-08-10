@@ -171,11 +171,11 @@ function Nav({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => void }
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
-        <a href="#" className="scene-3d flex items-center gap-2.5 font-bold tracking-tight">
-          <span className="logo-3d grid h-9 w-9 place-items-center rounded-[0.7rem] text-primary-foreground">
-            <Zap className="h-4.5 w-4.5 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]" />
+        <a href="#" className="group flex items-center gap-2.5 font-bold tracking-tight">
+          <span className="logo-3d grid h-9 w-9 place-items-center rounded-[0.7rem] text-primary">
+            <Zap className="h-4.5 w-4.5 transition-transform duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_var(--electric)]" />
           </span>
-          <span className="text-3d text-lg">NexByte</span>
+          <span className="text-lg transition-colors group-hover:text-primary">NexByte</span>
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">
