@@ -856,10 +856,11 @@ function GoogleBusiness() {
               {perks.map((p) => (
                 <li
                   key={p.t}
-                  className="group flex gap-3 rounded-xl border border-border/60 bg-background/40 p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-background"
+                  className="scene-3d group flex gap-3 rounded-xl border border-border/60 bg-background/40 p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-background"
                 >
-                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary transition-transform duration-300 group-hover:scale-110">
-                    <p.icon className="h-4 w-4" />
+                  <span className="icon-3d group-hover:icon-3d-hover grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary">
+                    <p.icon className="h-4 w-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.45)]" />
+
                   </span>
                   <span>
                     <span className="block text-sm font-semibold">{p.t}</span>
