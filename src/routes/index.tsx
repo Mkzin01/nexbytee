@@ -1232,11 +1232,11 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8">
         <div className="grid gap-10 md:grid-cols-4">
           <div>
-            <div className="scene-3d flex items-center gap-2.5 font-bold">
-              <span className="logo-3d grid h-9 w-9 place-items-center rounded-[0.7rem] text-primary-foreground">
-                <Zap className="h-4.5 w-4.5 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]" />
+            <div className="group flex items-center gap-2.5 font-bold">
+              <span className="logo-3d grid h-9 w-9 place-items-center rounded-[0.7rem] text-primary">
+                <Zap className="h-4.5 w-4.5 transition-transform duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_var(--electric)]" />
               </span>
-              <span className="text-3d">NexByte</span>
+              <span className="transition-colors group-hover:text-primary">NexByte</span>
             </div>
 
             <p className="mt-4 text-sm text-muted-foreground">
