@@ -1060,9 +1060,12 @@ function LogoSection() {
                 key={b.t}
                 data-reveal
                 style={{ transitionDelay: `${i * 60}ms` }}
-                className="card-tech group opacity-0 translate-y-4 rounded-xl border border-border bg-card p-4 transition-all duration-500 hover:-translate-y-1 hover:border-primary/40"
+                className="card-tech tilt-3d group opacity-0 translate-y-4 rounded-xl border border-border bg-card p-4 transition-all duration-500 hover:border-primary/40"
               >
-                <b.icon className="h-5 w-5 text-primary transition-transform duration-300 group-hover:scale-110" />
+                <span className="icon-3d group-hover:icon-3d-hover grid h-10 w-10 place-items-center rounded-lg bg-secondary text-primary">
+                  <b.icon className="h-5 w-5 drop-shadow-[0_2px_3px_rgba(0,0,0,0.45)]" />
+                </span>
+
                 <div className="mt-2.5 text-sm font-semibold">{b.t}</div>
                 <div className="mt-1 text-xs text-muted-foreground">{b.d}</div>
               </div>
