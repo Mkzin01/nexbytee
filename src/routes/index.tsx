@@ -522,11 +522,12 @@ function Plans() {
             key={p.name}
             data-reveal
             style={{ transitionDelay: `${i * 80}ms` }}
-            className={`relative opacity-0 translate-y-4 rounded-2xl border p-6 transition-all duration-500 ${
+            className={`tilt-3d relative opacity-0 translate-y-4 rounded-2xl border p-6 transition-all duration-500 ${
               p.featured
                 ? "border-primary/50 bg-gradient-to-b from-primary/10 to-card glow-electric md:-mt-4 md:mb-4"
                 : "border-border bg-card hover:border-border/80"
             }`}
+
           >
             {p.featured && (
               <div className="absolute -top-3 left-6 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">
@@ -702,7 +703,7 @@ function Portfolio() {
             key={p.name}
             data-reveal
             style={{ transitionDelay: `${i * 70}ms` }}
-            className="group flex flex-col opacity-0 translate-y-4 transition-all duration-500 overflow-hidden rounded-2xl border border-border bg-card hover:border-primary/40 hover:-translate-y-1 hover:shadow-[0_18px_50px_-24px_var(--electric-glow)] card-tech"
+            className="group tilt-3d flex flex-col opacity-0 translate-y-4 transition-all duration-500 overflow-hidden rounded-2xl border border-border bg-card hover:border-primary/40 hover:-translate-y-1 hover:shadow-[0_18px_50px_-24px_var(--electric-glow)] card-tech"
           >
             <div
               className="relative aspect-video overflow-hidden"
