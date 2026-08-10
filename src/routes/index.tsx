@@ -808,9 +808,12 @@ function WhyUs() {
             key={it.t}
             data-reveal
             style={{ transitionDelay: `${(i % 4) * 60}ms` }}
-            className="card-tech group opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-5 transition-transform hover:-translate-y-1"
+            className="card-tech tilt-3d group opacity-0 translate-y-4 transition-all duration-500 rounded-xl border border-border bg-card p-5"
           >
-            <it.icon className="h-5 w-5 text-primary" />
+            <span className="icon-3d group-hover:icon-3d-hover mb-3 grid h-10 w-10 place-items-center rounded-lg bg-secondary text-primary">
+              <it.icon className="h-5 w-5 drop-shadow-[0_2px_3px_rgba(0,0,0,0.45)]" />
+            </span>
+
             <div className="mt-3 font-semibold">{it.t}</div>
             <div className="mt-1 text-sm text-muted-foreground">{it.d}</div>
           </div>
