@@ -137,9 +137,6 @@ function WhatsAppFloat() {
         </div>
       </div>
       <div className="absolute -inset-1 rounded-[1.2rem] bg-gradient-to-tr from-white/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-      <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 sm:h-4 sm:w-4">
-        <span className="relative inline-flex rounded-full h-3.5 w-3.5 sm:h-4 sm:w-4 bg-white/20 border border-white/40"></span>
-      </span>
     </a>
   );
 }
