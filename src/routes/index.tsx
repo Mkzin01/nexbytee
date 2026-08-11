@@ -834,9 +834,9 @@ function GoogleBusiness() {
   ];
 
   const ranking = [
-    { pos: 3, name: "Concorrente A", rating: "4,2", active: false },
-    { pos: 2, name: "Concorrente B", rating: "4,5", active: false },
     { pos: 1, name: "A sua Empresa", rating: "4,9", active: true },
+    { pos: 2, name: "Concorrente B", rating: "4,5", active: false },
+    { pos: 3, name: "Concorrente A", rating: "4,2", active: false },
   ];
 
   return (
