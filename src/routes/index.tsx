@@ -128,7 +128,7 @@ function WhatsAppFloat() {
       href={getWhatsAppUrl("Olá NexByte, gostaria de falar sobre um projeto.")}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-5 right-5 z-[60] group flex h-14 w-14 items-center justify-center rounded-2xl bg-[#25D366] text-white shadow-[0_10px_30px_-5px_rgba(37,211,102,0.4)] transition-all duration-500 hover:scale-110 hover:-translate-y-1 active:scale-95 sm:bottom-8 sm:right-8 sm:h-16 sm:w-16"
+      className="fixed bottom-5 right-5 z-[60] group flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-[0_10px_30px_-5px_var(--electric-glow)] transition-all duration-500 hover:scale-110 hover:-translate-y-1 active:scale-95 sm:bottom-8 sm:right-8 sm:h-16 sm:w-16"
       aria-label="WhatsApp"
     >
       <div className="scene-3d pointer-events-none">
@@ -138,7 +138,6 @@ function WhatsAppFloat() {
       </div>
       <div className="absolute -inset-1 rounded-[1.2rem] bg-gradient-to-tr from-white/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 sm:h-4 sm:w-4">
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
         <span className="relative inline-flex rounded-full h-3.5 w-3.5 sm:h-4 sm:w-4 bg-white/20 border border-white/40"></span>
       </span>
     </a>
