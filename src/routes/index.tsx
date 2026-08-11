@@ -551,7 +551,8 @@ function Plans() {
               ))}
             </ul>
             <a
-              href={WHATSAPP_URL}
+            href={getWhatsAppUrl(`Olá NexByte, gostaria de pedir um orçamento para o plano: ${p.name}`)}
+
               className={`mt-8 inline-flex w-full items-center justify-center gap-1.5 rounded-full px-4 py-2.5 text-sm font-semibold transition-all ${
                 p.featured
                   ? "bg-primary text-primary-foreground hover:brightness-110"
