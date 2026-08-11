@@ -261,7 +261,8 @@ function Hero() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
-                href={WHATSAPP_URL}
+                href={getWhatsAppUrl("Olá NexByte, gostaria de pedir um orçamento para o meu projeto.")}
+
                 className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110 hover:shadow-[0_0_40px_-5px_var(--electric-glow)]"
               >
                 Pedir Orçamento
