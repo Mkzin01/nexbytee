@@ -398,7 +398,8 @@ function ServiceCard({ s, i, className }: { s: typeof services[0]; i: number; cl
 
       <div className="mt-auto pt-4">
         <a
-          href={WHATSAPP_URL}
+          href={getWhatsAppUrl(`Olá NexByte, gostaria de saber mais sobre o serviço: ${s.title}`)}
+
           className="inline-flex items-center gap-1 text-xs font-semibold text-primary opacity-0 transition-all duration-500 group-hover:opacity-100"
         >
           Saber mais <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
