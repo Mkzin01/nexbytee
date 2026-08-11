@@ -1220,7 +1220,7 @@ function FinalCTA() {
         </p>
         <div data-reveal className="opacity-0 translate-y-4 transition-all duration-700 delay-200 mt-8 flex justify-center">
           <a
-            href={WHATSAPP_URL}
+            href={getWhatsAppUrl("Olá NexByte, gostaria de pedir um orçamento e transformar a minha presença digital.")}
             className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110 hover:shadow-[0_0_50px_-5px_var(--electric-glow)] sm:text-base"
           >
             <Phone className="h-4 w-4" />
