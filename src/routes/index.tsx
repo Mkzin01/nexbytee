@@ -16,6 +16,9 @@ import helixLogo from "@/assets/logos/helix-logo.png";
 import verdeLogo from "@/assets/logos/verde-logo.png";
 import luminaLogo from "@/assets/logos/lumina-logo.png";
 import atlasLogo from "@/assets/logos/atlas-logo.png";
+import whatsappIcon from "@/assets/whatsapp.svg";
+
+
 
 
 
@@ -130,7 +133,7 @@ function WhatsAppFloat() {
     >
       <div className="scene-3d pointer-events-none">
         <div className="icon-3d relative flex items-center justify-center rounded-xl bg-white/10 p-2 sm:p-2.5 backdrop-blur-sm transition-transform duration-500 group-hover:rotate-x-12 group-hover:rotate-y-12">
-          <MessageCircle className="h-6 w-6 fill-white text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] sm:h-7 sm:w-7" />
+          <img src={whatsappIcon} alt="" className="h-6 w-6 brightness-0 invert drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] sm:h-7 sm:w-7" />
         </div>
       </div>
       <div className="absolute -inset-1 rounded-[1.2rem] bg-gradient-to-tr from-white/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
