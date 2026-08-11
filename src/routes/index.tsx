@@ -219,7 +219,8 @@ function Nav({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => void }
                 </a>
               ))}
               <a
-                href={WHATSAPP_URL}
+                href={getWhatsAppUrl("Olá NexByte, gostaria de pedir um orçamento através do menu mobile.")}
+
                 className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground"
               >
                 Pedir Orçamento <ArrowRight className="h-3.5 w-3.5" />
