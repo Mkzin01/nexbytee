@@ -1093,7 +1093,8 @@ function LogoSection() {
           </div>
 
           <a
-            href={WHATSAPP_URL}
+            href={getWhatsAppUrl("Olá NexByte, gostaria de um orçamento para a criação de um logótipo.")}
+
             className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:brightness-110 hover:shadow-[0_0_30px_-5px_var(--electric-glow)]"
           >
             Quero o meu logótipo <ArrowRight className="h-4 w-4" />
