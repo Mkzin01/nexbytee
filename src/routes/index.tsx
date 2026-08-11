@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight, Check, Globe, Rocket, MapPin, ShoppingBag, Sparkles, Search,
   Palette, TrendingUp, Menu, X, Phone, Mail, Instagram, Facebook, Linkedin,
-  Zap, ShieldCheck, Code2, Smartphone, Plus, Minus, Star,
+  Zap, ShieldCheck, Code2, Smartphone, Plus, Minus, Star, MessageCircle,
   Navigation as NavigationIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -125,18 +125,18 @@ function WhatsAppFloat() {
       href={getWhatsAppUrl("Olá NexByte, gostaria de falar sobre um projeto.")}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-[60] group flex h-16 w-16 items-center justify-center rounded-2xl bg-[#25D366] text-white shadow-[0_10px_30px_-5px_rgba(37,211,102,0.4)] transition-all duration-500 hover:scale-110 hover:-translate-y-1 active:scale-95 sm:bottom-8 sm:right-8"
+      className="fixed bottom-5 right-5 z-[60] group flex h-14 w-14 items-center justify-center rounded-2xl bg-[#25D366] text-white shadow-[0_10px_30px_-5px_rgba(37,211,102,0.4)] transition-all duration-500 hover:scale-110 hover:-translate-y-1 active:scale-95 sm:bottom-8 sm:right-8 sm:h-16 sm:w-16"
       aria-label="WhatsApp"
     >
       <div className="scene-3d pointer-events-none">
-        <div className="icon-3d relative flex items-center justify-center rounded-xl bg-white/10 p-2.5 backdrop-blur-sm transition-transform duration-500 group-hover:rotate-X-12 group-hover:rotate-Y-12">
-          <Phone className="h-7 w-7 fill-white text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]" />
+        <div className="icon-3d relative flex items-center justify-center rounded-xl bg-white/10 p-2 sm:p-2.5 backdrop-blur-sm transition-transform duration-500 group-hover:rotate-x-12 group-hover:rotate-y-12">
+          <MessageCircle className="h-6 w-6 fill-white text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] sm:h-7 sm:w-7" />
         </div>
       </div>
       <div className="absolute -inset-1 rounded-[1.2rem] bg-gradient-to-tr from-white/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-      <span className="absolute -top-1 -right-1 flex h-4 w-4">
+      <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5 sm:h-4 sm:w-4">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-        <span className="relative inline-flex rounded-full h-4 w-4 bg-white/20 border border-white/40"></span>
+        <span className="relative inline-flex rounded-full h-3.5 w-3.5 sm:h-4 sm:w-4 bg-white/20 border border-white/40"></span>
       </span>
     </a>
   );
