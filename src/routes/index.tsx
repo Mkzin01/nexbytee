@@ -19,7 +19,9 @@ import atlasLogo from "@/assets/logos/atlas-logo.png";
 
 
 
-const WHATSAPP_URL = "https://wa.me/351000000000?text=Ol%C3%A1%20NexByte%2C%20quero%20um%20or%C3%A7amento";
+const WHATSAPP_NUMBER = "351932111175";
+const getWhatsAppUrl = (text: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -187,7 +189,8 @@ function Nav({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => void }
         </nav>
         <div className="hidden md:block">
           <a
-            href={WHATSAPP_URL}
+            href={getWhatsAppUrl("Olá NexByte, gostaria de pedir um orçamento através do site.")}
+
             className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all hover:brightness-110 hover:shadow-[0_0_30px_-5px_var(--electric-glow)]"
           >
             Pedir Orçamento <ArrowRight className="h-3.5 w-3.5" />
@@ -216,7 +219,8 @@ function Nav({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => void }
                 </a>
               ))}
               <a
-                href={WHATSAPP_URL}
+                href={getWhatsAppUrl("Olá NexByte, gostaria de pedir um orçamento através do menu mobile.")}
+
                 className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground"
               >
                 Pedir Orçamento <ArrowRight className="h-3.5 w-3.5" />
@@ -257,7 +261,8 @@ function Hero() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
-                href={WHATSAPP_URL}
+                href={getWhatsAppUrl("Olá NexByte, gostaria de pedir um orçamento para o meu projeto.")}
+
                 className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110 hover:shadow-[0_0_40px_-5px_var(--electric-glow)]"
               >
                 Pedir Orçamento
@@ -393,7 +398,8 @@ function ServiceCard({ s, i, className }: { s: typeof services[0]; i: number; cl
 
       <div className="mt-auto pt-4">
         <a
-          href={WHATSAPP_URL}
+          href={getWhatsAppUrl(`Olá NexByte, gostaria de saber mais sobre o serviço: ${s.title}`)}
+
           className="inline-flex items-center gap-1 text-xs font-semibold text-primary opacity-0 transition-all duration-500 group-hover:opacity-100"
         >
           Saber mais <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
@@ -545,7 +551,8 @@ function Plans() {
               ))}
             </ul>
             <a
-              href={WHATSAPP_URL}
+            href={getWhatsAppUrl(`Olá NexByte, gostaria de pedir um orçamento para o plano: ${p.name}`)}
+
               className={`mt-8 inline-flex w-full items-center justify-center gap-1.5 rounded-full px-4 py-2.5 text-sm font-semibold transition-all ${
                 p.featured
                   ? "bg-primary text-primary-foreground hover:brightness-110"
@@ -1086,7 +1093,8 @@ function LogoSection() {
           </div>
 
           <a
-            href={WHATSAPP_URL}
+            href={getWhatsAppUrl("Olá NexByte, gostaria de um orçamento para a criação de um logótipo.")}
+
             className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:brightness-110 hover:shadow-[0_0_30px_-5px_var(--electric-glow)]"
           >
             Quero o meu logótipo <ArrowRight className="h-4 w-4" />
@@ -1212,7 +1220,7 @@ function FinalCTA() {
         </p>
         <div data-reveal className="opacity-0 translate-y-4 transition-all duration-700 delay-200 mt-8 flex justify-center">
           <a
-            href={WHATSAPP_URL}
+            href={getWhatsAppUrl("Olá NexByte, gostaria de pedir um orçamento e transformar a minha presença digital.")}
             className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:brightness-110 hover:shadow-[0_0_50px_-5px_var(--electric-glow)] sm:text-base"
           >
             <Phone className="h-4 w-4" />
