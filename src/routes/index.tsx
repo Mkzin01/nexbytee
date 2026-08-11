@@ -19,7 +19,9 @@ import atlasLogo from "@/assets/logos/atlas-logo.png";
 
 
 
-const WHATSAPP_URL = "https://wa.me/351000000000?text=Ol%C3%A1%20NexByte%2C%20quero%20um%20or%C3%A7amento";
+const WHATSAPP_NUMBER = "351932111175";
+const getWhatsAppUrl = (text: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
