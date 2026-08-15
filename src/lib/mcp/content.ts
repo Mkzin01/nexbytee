@@ -137,7 +137,7 @@ export const PORTFOLIO: readonly CaseStudy[] = [
 export const FAQ: readonly { question: string; answer: string }[] = [
   { question: "Quanto tempo demora um website?", answer: "Entre 7 e 21 dias úteis dependendo da complexidade e do plano escolhido." },
   { question: "O domínio está incluído?", answer: "Sim, incluímos o registo do domínio no primeiro ano em todos os planos." },
-  { question: "O alojamento está incluído?", answer: "Sim, alojamento rápido e seguro incluído durante o primeiro ano." },
+  { question: "O alojamento está incluído?", answer: "Sim, alojamento rápido e seguro incluído." },
   { question: "Posso alterar o site depois?", answer: "Claro. Entregamos formação e oferecemos planos de manutenção mensais." },
   { question: "O site aparece no Google?", answer: "Todos os sites são otimizados para SEO desde o primeiro dia." },
   { question: "Fazem manutenção?", answer: "Sim, temos planos de suporte técnico e atualizações contínuas." },

@@ -1185,7 +1185,7 @@ function FAQ() {
   const faqs = [
     ["Quanto tempo demora um website?", "Entre 7 e 21 dias úteis dependendo da complexidade e do plano escolhido."],
     ["O domínio está incluído?", "Não. O registo do domínio é um valor à parte, permitindo que tenha total propriedade e liberdade de escolha."],
-    ["O alojamento está incluído?", "Sim, alojamento rápido e seguro incluído durante o primeiro ano."],
+    ["O alojamento está incluído?", "Sim, alojamento rápido e seguro incluído."],
     ["Posso alterar o site depois?", "Claro. Entregamos formação e oferecemos planos de manutenção mensais."],
     ["O site aparece no Google?", "Todos os sites são otimizados para SEO desde o primeiro dia."],
     ["Fazem manutenção?", "Sim, temos planos de suporte técnico e atualizações contínuas."],
