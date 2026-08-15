@@ -321,7 +321,7 @@ function Hero() {
                   <span className="h-2 w-2 rounded-full bg-muted-foreground/40" />
                   <span className="h-2 w-2 rounded-full bg-muted-foreground/40" />
                   <span className="h-2 w-2 rounded-full bg-primary/70" />
-                  <span className="ml-2 font-mono text-[10px] tracking-wider text-muted-foreground">nexbyte.pt</span>
+                  <span className="ml-2 font-mono text-[10px] tracking-wider text-muted-foreground">nexbyte.site</span>
                 </div>
                 <img
                   src={heroMockup.url}
