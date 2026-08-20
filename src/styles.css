@@ -10,11 +10,13 @@
 
 @theme inline {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --radius-sm: calc(var(--radius) - 3px);
+  --radius-md: calc(var(--radius) - 1px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-2xl: calc(var(--radius) + 10px);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -37,93 +39,228 @@
   --color-graphite: var(--graphite);
   --color-electric: var(--electric);
   --color-electric-glow: var(--electric-glow);
+  --color-cyan: var(--cyan);
+  --color-hairline: var(--hairline);
 }
 
 :root {
-  --radius: 0.75rem;
-  /* NexByte palette: black, white, graphite, electric blue */
-  --background: oklch(0.145 0.005 260);   /* near-black */
-  --foreground: oklch(0.985 0 0);          /* white */
-  --card: oklch(0.19 0.006 260);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.19 0.006 260);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.65 0.22 255);         /* electric blue */
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.24 0.008 260);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.22 0.006 260);
-  --muted-foreground: oklch(0.68 0.01 260);
-  --accent: oklch(0.28 0.01 260);
-  --accent-foreground: oklch(0.985 0 0);
+  --radius: 0.5rem;
+
+  /* NexByte — grafite profundo, azul elétrico, ciano de sinal */
+  --background: oklch(0.132 0.014 262);
+  --foreground: oklch(0.97 0.004 260);
+  --card: oklch(0.171 0.015 263);
+  --card-foreground: oklch(0.97 0.004 260);
+  --popover: oklch(0.171 0.015 263);
+  --popover-foreground: oklch(0.97 0.004 260);
+  --primary: oklch(0.67 0.185 250);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.215 0.016 263);
+  --secondary-foreground: oklch(0.97 0.004 260);
+  --muted: oklch(0.2 0.014 263);
+  --muted-foreground: oklch(0.665 0.018 262);
+  --accent: oklch(0.26 0.02 263);
+  --accent-foreground: oklch(0.97 0.004 260);
   --destructive: oklch(0.6 0.24 27);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 8%);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(1 0 0 / 9%);
   --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.65 0.22 255);
-  --graphite: oklch(0.32 0.008 260);
-  --electric: oklch(0.65 0.22 255);
-  --electric-glow: oklch(0.65 0.22 255 / 40%);
+  --ring: oklch(0.67 0.185 250);
+
+  --graphite: oklch(0.3 0.014 263);
+  --electric: oklch(0.67 0.185 250);
+  --electric-glow: oklch(0.67 0.185 250 / 38%);
+  --cyan: oklch(0.83 0.135 199);
+  --hairline: oklch(1 0 0 / 6%);
+
+  /* posição do ponteiro, alimentada pelo spotlight */
+  --mx: 50%;
+  --my: 0%;
 }
 
 .dark { color-scheme: dark; }
 
 @layer base {
   * { border-color: var(--color-border); }
-  html { color-scheme: dark; }
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
     font-feature-settings: "cv11", "ss01";
+    overflow-x: hidden;
   }
-  ::selection { background: var(--electric); color: white; }
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.028em;
+  }
+  ::selection { background: var(--electric); color: oklch(0.99 0 0); }
+
+  /* scrollbar discreta e técnica */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: oklch(0.16 0.014 263); }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.32 0.03 260);
+    border: 3px solid oklch(0.16 0.014 263);
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--electric); }
 }
+
+/* ---------------- superfícies ---------------- */
 
 @utility grid-bg {
   background-image:
-    linear-gradient(to right, oklch(1 0 0 / 4%) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(1 0 0 / 4%) 1px, transparent 1px);
-  background-size: 48px 48px;
+    linear-gradient(to right, oklch(1 0 0 / 3.5%) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(1 0 0 / 3.5%) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+@utility grid-bg-animated {
+  background-image:
+    linear-gradient(to right, oklch(1 0 0 / 4.5%) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(1 0 0 / 4.5%) 1px, transparent 1px);
+  background-size: 64px 64px;
+  animation: grid-drift 26s linear infinite;
+}
+
+/* malha de pontos tipo blueprint */
+@utility dot-bg {
+  background-image: radial-gradient(oklch(1 0 0 / 10%) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* grão de filme — mata o aspeto “render limpo demais” */
+@utility grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
 }
 
 @utility scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+@utility num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* ---------------- linguagem HUD ---------------- */
+
+/* cantos em esquadro — o detalhe que dá leitura de instrumento */
+@utility hud {
+  position: relative;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: var(--electric);
+    opacity: 0.5;
+    transition: opacity 0.4s ease, width 0.4s ease, height 0.4s ease;
+    pointer-events: none;
+  }
+  &::before {
+    top: 8px; left: 8px;
+    border-top: 1.5px solid; border-left: 1.5px solid;
+    border-top-left-radius: 3px;
+  }
+  &::after {
+    bottom: 8px; right: 8px;
+    border-bottom: 1.5px solid; border-right: 1.5px solid;
+    border-bottom-right-radius: 3px;
+  }
+  &:hover::before,
+  &:hover::after { opacity: 1; width: 20px; height: 20px; }
+}
+
+/* régua de escala vertical, usada nos cabeçalhos de secção */
+@utility tick-rail {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--hairline) 0 1px,
+    transparent 1px 9px
+  );
+}
+
+/* brilho que segue o ponteiro dentro do cartão */
+@utility lift {
+  position: relative;
+  isolation: isolate;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.45s ease,
+    background-color 0.45s ease;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      340px circle at var(--px, 50%) var(--py, 0%),
+      oklch(0.67 0.185 250 / 14%),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.45s ease;
+    pointer-events: none;
+    z-index: -1;
+  }
+  &:hover {
+    transform: translateY(-3px);
+    border-color: oklch(0.67 0.185 250 / 42%);
+  }
+  &:hover::before { opacity: 1; }
+}
+
+/* fio de luz no topo de um painel */
+@utility topwire {
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 10%; right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--electric), transparent);
+    opacity: 0.55;
   }
 }
 
-@utility grid-bg-animated {
-  background-image:
-    linear-gradient(to right, oklch(1 0 0 / 5%) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(1 0 0 / 5%) 1px, transparent 1px);
-  background-size: 48px 48px;
-  animation: grid-drift 22s linear infinite;
-}
-
 @utility glow-electric {
-  box-shadow: 0 0 40px -8px var(--electric-glow), 0 0 0 1px oklch(1 0 0 / 8%);
+  box-shadow:
+    0 0 0 1px oklch(1 0 0 / 7%),
+    0 30px 70px -40px var(--electric-glow);
 }
 
-/* Animated gradient text */
+/* texto com gradiente — usado com parcimónia, não em todos os títulos */
 @utility text-gradient-tech {
   background-image: linear-gradient(
     100deg,
-    var(--electric) 0%,
-    oklch(0.85 0.13 220) 35%,
-    var(--electric) 70%
+    var(--foreground) 0%,
+    var(--cyan) 45%,
+    var(--electric) 75%
   );
-  background-size: 200% 100%;
+  background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: gradient-pan 6s linear infinite;
+  animation: gradient-pan 9s linear infinite alternate;
 }
 
-/* Card with a rotating conic border that lights up on hover */
+/* contorno tipográfico para o wordmark gigante do rodapé */
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px oklch(1 0 0 / 14%);
+}
+
+/* moldura com borda cónica que acende ao passar o rato */
 @utility card-tech {
   position: relative;
   isolation: isolate;
@@ -136,8 +273,9 @@
     background: conic-gradient(
       from var(--angle, 0deg),
       transparent 0%,
-      var(--electric) 12%,
-      transparent 28%
+      var(--electric) 10%,
+      var(--cyan) 18%,
+      transparent 30%
     );
     -webkit-mask:
       linear-gradient(#000 0 0) content-box,
@@ -150,11 +288,10 @@
   }
   &:hover::before {
     opacity: 1;
-    animation: border-spin 3s linear infinite;
+    animation: border-spin 3.4s linear infinite;
   }
 }
 
-/* Sweeping light beam across a surface */
 @utility scan-beam {
   position: relative;
   overflow: hidden;
@@ -164,18 +301,32 @@
     inset: 0;
     background: linear-gradient(
       105deg,
-      transparent 40%,
-      oklch(1 0 0 / 10%) 50%,
-      transparent 60%
+      transparent 42%,
+      oklch(1 0 0 / 7%) 50%,
+      transparent 58%
     );
     transform: translateX(-100%);
-    animation: beam-sweep 4.5s ease-in-out infinite;
+    animation: beam-sweep 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+/* linha horizontal que varre um painel de dados */
+@utility scanline {
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    opacity: 0.7;
+    animation: scan-y 5.5s ease-in-out infinite;
     pointer-events: none;
   }
 }
 
 @utility float-slow {
-  animation: float-y 7s ease-in-out infinite;
+  animation: float-y 8s ease-in-out infinite;
 }
 
 @utility pulse-ring {
@@ -185,119 +336,91 @@
     inset: 0;
     border-radius: inherit;
     box-shadow: 0 0 0 0 var(--electric-glow);
-    animation: ring-pulse 2.6s ease-out infinite;
+    animation: ring-pulse 2.8s ease-out infinite;
   }
 }
 
 @utility marquee-track {
-  animation: marquee-x 28s linear infinite;
+  animation: marquee-x 34s linear infinite;
 }
 
-/* ---------- 3D system ---------- */
+@utility marquee-slow {
+  animation: marquee-x 60s linear infinite;
+}
 
-/* Perspective wrapper: gives children real depth */
+/* ---------------- profundidade contida ---------------- */
+
 @utility scene-3d {
   perspective: 800px;
   perspective-origin: 50% 50%;
 }
 
-/* Logo mark: Refined tech badge with a sleek, minimalist glowing aesthetic */
 @utility logo-3d {
   position: relative;
   isolation: isolate;
-  background: linear-gradient(135deg, oklch(0.25 0.01 260) 0%, oklch(0.18 0.01 260) 100%);
-  border: 1.5px solid oklch(1 0 0 / 12%);
-  box-shadow: 
-    0 10px 25px -8px oklch(0 0 0 / 60%),
-    inset 0 1px 1px oklch(1 0 0 / 8%);
-  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  background: linear-gradient(140deg, oklch(0.28 0.03 258) 0%, oklch(0.16 0.014 262) 100%);
+  border: 1px solid oklch(1 0 0 / 14%);
+  box-shadow:
+    0 8px 22px -10px oklch(0 0 0 / 70%),
+    inset 0 1px 1px oklch(1 0 0 / 10%);
+  transition: all 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
   overflow: hidden;
 
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 30% 20%, oklch(1 0 0 / 8%), transparent 60%);
-    pointer-events: none;
-  }
-
-  /* Core glow dot */
   &::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 50%, var(--electric) 0%, transparent 70%);
-    opacity: 0.15;
-    mix-blend-mode: plus-lighter;
-    transition: opacity 0.5s ease;
+    background: radial-gradient(circle at 50% 120%, var(--electric) 0%, transparent 65%);
+    opacity: 0.25;
+    transition: opacity 0.45s ease;
   }
 
   &:hover {
-    transform: translateY(-2px) scale(1.04);
-    border-color: var(--electric);
-    box-shadow: 
-      0 20px 40px -12px oklch(0 0 0 / 70%),
-      0 0 25px -5px var(--electric-glow),
-      inset 0 1px 2px oklch(1 0 0 / 15%);
-    
-    &::after {
-      opacity: 0.45;
-    }
+    border-color: oklch(0.67 0.185 250 / 60%);
+    box-shadow:
+      0 14px 30px -12px oklch(0 0 0 / 75%),
+      0 0 22px -6px var(--electric-glow),
+      inset 0 1px 2px oklch(1 0 0 / 16%);
+    &::after { opacity: 0.6; }
   }
 }
 
-/* Icon tiles: beveled, raised surface with soft depth */
 @utility icon-3d {
   transform-style: preserve-3d;
   background-image: linear-gradient(
     155deg,
-    oklch(1 0 0 / 10%) 0%,
-    oklch(1 0 0 / 2%) 40%,
-    oklch(0 0 0 / 22%) 100%
+    oklch(1 0 0 / 9%) 0%,
+    oklch(1 0 0 / 2%) 45%,
+    oklch(0 0 0 / 20%) 100%
   );
   box-shadow:
-    inset 0 1px 0 oklch(1 0 0 / 22%),
-    inset 0 -2px 3px oklch(0 0 0 / 30%),
-    0 6px 14px -6px oklch(0 0 0 / 70%);
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease,
-    background-color 0.45s ease;
+    inset 0 1px 0 oklch(1 0 0 / 18%),
+    inset 0 -2px 3px oklch(0 0 0 / 26%),
+    0 5px 12px -6px oklch(0 0 0 / 65%);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s ease,
+    background-color 0.45s ease,
+    color 0.45s ease;
 }
 
 @utility icon-3d-hover {
-  transform: rotateX(-12deg) rotateY(12deg) translateZ(10px);
+  transform: translateY(-2px) rotateX(-9deg) rotateY(9deg);
   box-shadow:
-    inset 0 1px 0 oklch(1 0 0 / 40%),
-    inset 0 -3px 5px oklch(0 0 0 / 32%),
-    0 14px 24px -8px oklch(0 0 0 / 75%),
-    0 0 34px -6px var(--electric-glow);
+    inset 0 1px 0 oklch(1 0 0 / 34%),
+    inset 0 -3px 5px oklch(0 0 0 / 28%),
+    0 12px 22px -10px oklch(0 0 0 / 72%),
+    0 0 26px -8px var(--electric-glow);
 }
 
-/* Cards: subtle tilt + lift in 3D space */
-@utility tilt-3d {
-  transform-style: preserve-3d;
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
-  &:hover {
-    transform: perspective(1000px) rotateX(4deg) rotateY(-4deg) translateY(-6px) translateZ(14px);
-    box-shadow: 0 26px 46px -22px oklch(0 0 0 / 85%), 0 0 40px -18px var(--electric-glow);
-  }
-}
-
-/* Text with an extruded shadow stack */
-@utility text-3d {
-  text-shadow:
-    0 1px 0 oklch(0.55 0.02 260),
-    0 2px 0 oklch(0.45 0.02 260),
-    0 3px 0 oklch(0.36 0.02 260),
-    0 5px 10px oklch(0 0 0 / 55%);
-}
-
+/* ---------------- keyframes ---------------- */
 
 @keyframes grid-drift {
-  to { background-position: 48px 48px; }
+  to { background-position: 64px 64px; }
 }
 
 @keyframes gradient-pan {
-  to { background-position: 200% 0; }
+  to { background-position: 100% 0; }
 }
 
 @property --angle {
@@ -315,9 +438,16 @@
   55%, 100% { transform: translateX(100%); }
 }
 
+@keyframes scan-y {
+  0% { top: 0%; opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100% { top: 100%; opacity: 0; }
+}
+
 @keyframes float-y {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-9px); }
 }
 
 @keyframes ring-pulse {
@@ -330,11 +460,23 @@
   to { transform: translateX(-50%); }
 }
 
+@keyframes caret-blink {
+  0%, 45% { opacity: 1; }
+  50%, 95% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@utility caret {
+  animation: caret-blink 1.1s steps(1) infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
