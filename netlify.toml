@@ -1,0 +1,21 @@
+# Esta app tem renderização no servidor (SSR).
+#
+# O build gera duas coisas:
+#   - dist/                          -> assets estáticos (publish)
+#   - .netlify/functions-internal/   -> a função que renderiza as páginas
+#                                       (o Netlify deteta-a automaticamente)
+#
+# A própria função declara `path = "/*"` com `preferStatic`, por isso os
+# ficheiros de dist/ são servidos primeiro e todo o resto vai para o SSR —
+# não é preciso ficheiro de _redirects.
+#
+# NITRO_PRESET diz ao nitro para gerar para o Netlify; sem ele o build
+# assume Cloudflare, que é o alvo por omissão deste projeto.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NITRO_PRESET = "netlify"
+  NODE_VERSION = "22"
