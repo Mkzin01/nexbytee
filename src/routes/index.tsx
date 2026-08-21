@@ -31,7 +31,7 @@ import {
   Navigation as NavigationIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import heroMockup from "@/assets/hero-nexbyte.jpg.asset.json";
+import heroMockup from "@/assets/hero-nexbyte.jpg";
 import auroraImg from "@/assets/portfolio/aurora.jpg";
 import novaImg from "@/assets/portfolio/nova.jpg";
 import velaImg from "@/assets/portfolio/vela.jpg";
@@ -828,11 +828,11 @@ function Hero() {
 
                   <div className="relative">
                     <img
-                      src={heroMockup.url}
+                      src={heroMockup}
                       alt="Mockups de websites desenvolvidos pela NexByte"
-                      className="aspect-[16/11] w-full bg-[oklch(0.19_0.015_263)] object-cover"
-                      width={1600}
-                      height={1100}
+                      className="aspect-[5/4] w-full bg-[oklch(0.19_0.015_263)] object-cover"
+                      width={1200}
+                      height={960}
                       loading="eager"
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[oklch(0.16_0.014_262)] via-transparent to-transparent" />

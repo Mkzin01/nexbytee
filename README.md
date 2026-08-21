@@ -1,26 +1,59 @@
-# Next Prompt Guide
+# NexByte
 
-proximo projeto prompt a seguir
-
-This project was built with [Lovable](https://lovable.dev).
+Site da NexByte — agência web em Portugal. Websites, landing pages,
+identidade visual, SEO e Google Business.
 
 **Live app**: https://nexbytee.lovable.app
 
-## Build with Lovable
+Construído com [Lovable](https://lovable.dev) sobre TanStack Start (React + Vite).
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/eee20e53-560f-458a-bd7b-f993433e45b4).
+## Publicação
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+Esta app tem **renderização no servidor** (SSR) e rotas de servidor (`/mcp`,
+`/.well-known/...`). O `vite build` produz um Worker em `.output/server`, não
+uma pasta de ficheiros estáticos.
 
-## Development
+> **Por isso o GitHub Pages não serve este site.** O Pages só entrega
+> ficheiros estáticos; sem `index.html` na raiz, mostra o `README.md`
+> renderizado. Não é um erro do build — é o host errado para o tipo de app.
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+Destinos que funcionam:
+
+- **Lovable** — publica automaticamente a partir de `main`, sem configuração.
+- **Cloudflare Workers** — via `.github/workflows/deploy.yml`, em cada push
+  para `main`. O `wrangler.json` é gerado pelo nitro durante o build.
+
+### Configurar o deploy na Cloudflare
+
+Em **Settings → Secrets and variables → Actions**, adiciona:
+
+| Secret                  | Onde obter                                                       |
+| ----------------------- | ---------------------------------------------------------------- |
+| `CLOUDFLARE_API_TOKEN`  | Cloudflare → My Profile → API Tokens → _Edit Cloudflare Workers_ |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare → Workers & Pages → barra lateral                     |
+
+Depois, cada push para `main` publica automaticamente. Também podes correr o
+workflow à mão em **Actions → Deploy → Run workflow**.
+
+## Desenvolvimento
+
+Precisas de Node.js e npm — [instalar com nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
+git clone <url-deste-repositorio>
+cd nexbytee
 npm i
 npm run dev
 ```
+
+| Comando         | O que faz                         |
+| --------------- | --------------------------------- |
+| `npm run dev`   | Servidor de desenvolvimento       |
+| `npm run build` | Build de produção para `.output/` |
+| `npm run lint`  | ESLint + Prettier                 |
+
+## Continuar no Lovable
+
+Continua a desenvolver no [editor Lovable](https://lovable.dev/projects/eee20e53-560f-458a-bd7b-f993433e45b4).
+Alterações feitas no Lovable são commitadas neste repositório, e o que
+enviares para `main` sincroniza de volta para o Lovable.

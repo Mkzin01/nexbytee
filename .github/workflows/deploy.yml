@@ -1,0 +1,36 @@
+name: Deploy
+
+# O site é uma app TanStack Start com SSR: o build produz um Worker
+# (.output/server) e não ficheiros estáticos, por isso não pode ser servido
+# pelo GitHub Pages. Este workflow publica-o na Cloudflare.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - run: bun install --frozen-lockfile
+
+      - run: bun run build
+
+      # O wrangler.json gerado pelo nitro fica em .output/server e aponta
+      # para ../public como diretório de assets.
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: .output/server
+          command: deploy
