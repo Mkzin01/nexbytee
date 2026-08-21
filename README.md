@@ -10,30 +10,33 @@ Construído com [Lovable](https://lovable.dev) sobre TanStack Start (React + Vit
 ## Publicação
 
 Esta app tem **renderização no servidor** (SSR) e rotas de servidor (`/mcp`,
-`/.well-known/...`). O `vite build` produz um Worker em `.output/server`, não
-uma pasta de ficheiros estáticos.
+`/.well-known/...`). O build não produz uma pasta de ficheiros estáticos: gera
+os assets em `dist/` e uma função que renderiza as páginas.
 
 > **Por isso o GitHub Pages não serve este site.** O Pages só entrega
 > ficheiros estáticos; sem `index.html` na raiz, mostra o `README.md`
 > renderizado. Não é um erro do build — é o host errado para o tipo de app.
 
-Destinos que funcionam:
+### Netlify
 
-- **Lovable** — publica automaticamente a partir de `main`, sem configuração.
-- **Cloudflare Workers** — via `.github/workflows/deploy.yml`, em cada push
-  para `main`. O `wrangler.json` é gerado pelo nitro durante o build.
+Já configurado em `netlify.toml`. Para ligar:
 
-### Configurar o deploy na Cloudflare
+1. [app.netlify.com](https://app.netlify.com) → **Add new site** → **Import an
+   existing project** → GitHub → escolhe `nexbytee`.
+2. Não mexas nas definições de build — o Netlify lê o `netlify.toml`
+   (comando `npm run build`, publish `dist`, `NITRO_PRESET=netlify`).
+3. **Deploy site**.
 
-Em **Settings → Secrets and variables → Actions**, adiciona:
+A partir daí, cada push para `main` publica automaticamente. A função SSR é
+detetada em `.netlify/functions-internal/` e declara `path = "/*"` com
+`preferStatic`, por isso os assets são servidos primeiro e o resto vai para o
+servidor — não é preciso `_redirects`.
 
-| Secret                  | Onde obter                                                       |
-| ----------------------- | ---------------------------------------------------------------- |
-| `CLOUDFLARE_API_TOKEN`  | Cloudflare → My Profile → API Tokens → _Edit Cloudflare Workers_ |
-| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare → Workers & Pages → barra lateral                     |
+### Lovable
 
-Depois, cada push para `main` publica automaticamente. Também podes correr o
-workflow à mão em **Actions → Deploy → Run workflow**.
+Continua a publicar a partir de `main` em https://nexbytee.lovable.app, sem
+configuração. O `NITRO_PRESET` do `netlify.toml` não o afeta: o ambiente de
+build do Lovable força sempre o seu próprio alvo.
 
 ## Desenvolvimento
 
